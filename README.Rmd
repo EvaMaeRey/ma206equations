@@ -1,7 +1,5 @@
 ---
-title: "ma206equations"
-output: html_document
-date: '2023-01-07'
+output: github_document
 ---
 
 See also: https://github.com/EvaMaeRey/ay_2023_2_advanced_individual_study
