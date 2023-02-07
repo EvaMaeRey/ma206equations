@@ -26,8 +26,8 @@ package.
 A good start for looking at the core of equations used in ma206 is the
 code annex:
 
--   Rendered: <https://evamaerey.github.io/ma206/code_annex.html>
--   Source:
+  - Rendered: <https://evamaerey.github.io/ma206/code_annex.html>
+  - Source:
     <https://github.com/EvaMaeRey/ma206/blob/master/code_annex.Rmd>
 
 Result would be to quickly include relevant formulas in plots (like
@@ -37,7 +37,7 @@ proportion) and .rmd documents.
 # Project timeline
 
 | Timing      | Activity and Deliverable                                                                                           | Hours |
-|-------------|--------------------------------------------------------------------------------------------------------------------|-------|
+| ----------- | ------------------------------------------------------------------------------------------------------------------ | ----- |
 | 0-3 weeks   | Background on writing functions in R and package architecture                                                      | 15    |
 | 3-6 weeks   | ggplot2 programming basics, math type interface                                                                    | 15    |
 | 6-10 weeks  | Building functionality for returning intro to stats and probability equations easily from R for documents and plot | 15    |
@@ -45,16 +45,35 @@ proportion) and .rmd documents.
 | 12-15 weeks | Incorporating feedback                                                                                             | 10    |
 | Final       | Report and presentation.                                                                                           | 10    |
 
-# Some initial code ideas…
+# The problem
+
+Using mathematical notation is a powerful way to communicate about
+probabilistic and statistical concept. When notation is combined with
+data visualization or descriptive prose that power is even greater.
+
+However, using equations in these contexts is often done by typing in a
+typesetting version of the equation that may not be awkward. Consider
+the probability density function for the normal distribution, centered
+at \(\mu\) with a standard deviation of \(\sigma\):
+
+\[p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }\]
+
+The typed version of this equation which follows is a distant cousin
+from its beautiful rendered kin above:
+
+`p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2
+\sigma^2} }`
 
 The equations in the plot were produce in the following fashion (no
-functions or package prebuilt):
+functions or package pre-built):
 
 ``` r
 equation_z_stat_md <- "$z=\\frac{\\hat{p}-\\pi}{SD_{null}}$, where $SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}$"
+
 equation_z_stat_plot <- latex2exp::TeX(equation_z_stat_md)
 
 equation_conf_interval_z_md <- "$CI = \\hat{p}\\pm Multiplier*SE$, where $SE = \\sqrt{\\frac{\\hat{p}*(1-\\hat{p})}{n}}$"
+
 equation_conf_interval_z_plot <- latex2exp::TeX(equation_conf_interval_z_md)
 
 
@@ -67,7 +86,7 @@ ggplot() +
            color = "grey25", size = 4)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
 ggplot() +
@@ -77,20 +96,23 @@ ggplot() +
            color = "grey25", size = 4)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
-![z=\\frac{\\hat{p}-\\pi}{SD\_{null}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;z%3D%5Cfrac%7B%5Chat%7Bp%7D-%5Cpi%7D%7BSD_%7Bnull%7D%7D "z=\frac{\hat{p}-\pi}{SD_{null}}"),
-where
-![SD\_{null}=\\sqrt{\\frac{\\pi\_{0}\*(1-\\pi\_{0})}{n}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;SD_%7Bnull%7D%3D%5Csqrt%7B%5Cfrac%7B%5Cpi_%7B0%7D%2A%281-%5Cpi_%7B0%7D%29%7D%7Bn%7D%7D "SD_{null}=\sqrt{\frac{\pi_{0}*(1-\pi_{0})}{n}}")
+\(\sqrt{3x-1}+(1+x)^2\)
+
+\(z=\frac{\hat{p}-\pi}{SD_{null}}\), where
+\(SD_{null}=\sqrt{\frac{\pi_{0}*(1-\pi_{0})}{n}}\)
+
+\[\alpha\]
 
 # How do we write a package?
 
--   We will still follow the steps outlined in this data package readme:
+  - We will still follow the steps outlined in this data package readme:
     <https://github.com/EvaMaeRey/tidytitanic>
--   As well as consult the package building guide:
+  - As well as consult the package building guide:
     <https://evamaerey.github.io/package_in_20_minutes/package_in_20_minutes>
 
 # How do we collaborate and share the package?
 
--   create a github account for collaboration <https://github.com/>
--   we’ll make the repository available in this account
+  - create a github account for collaboration <https://github.com/>
+  - we’ll make the repository available in this account

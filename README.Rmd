@@ -37,17 +37,35 @@ Result would be to quickly include relevant formulas in plots (like ggplot below
 
 
 
-# Some initial code ideas...
+# The problem
+
+Using mathematical notation is a powerful way to communicate about probabilistic and statistical concept.  When notation is combined with data visualization or descriptive prose that power is even greater.  
+
+However, using equations in these contexts is often done by typing in a typesetting version of the equation that may not be awkward.  Consider the probability density function for the normal distribution, centered at $\mu$ with a standard deviation of $\sigma$:
+
+$$p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }$$
+
+The typed version of this equation which follows is a distant cousin from its beautiful rendered kin above:
+
+`p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }`
 
 
-The equations in the plot were produce in the following fashion (no functions or package prebuilt): 
+```{r}
+
+
+```
+
+
+The equations in the plot were produce in the following fashion (no functions or package pre-built): 
 
 ```{r, eval = T, warning=F, message=F}
 
 equation_z_stat_md <- "$z=\\frac{\\hat{p}-\\pi}{SD_{null}}$, where $SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}$"
+
 equation_z_stat_plot <- latex2exp::TeX(equation_z_stat_md)
 
 equation_conf_interval_z_md <- "$CI = \\hat{p}\\pm Multiplier*SE$, where $SE = \\sqrt{\\frac{\\hat{p}*(1-\\hat{p})}{n}}$"
+
 equation_conf_interval_z_plot <- latex2exp::TeX(equation_conf_interval_z_md)
 
 
@@ -67,7 +85,11 @@ ggplot() +
 
 ```
 
+$\sqrt{3x-1}+(1+x)^2$
+
 `r equation_z_stat_md` 
+
+$$\alpha$$
 
 # How do we write a package?
 
