@@ -1,2 +1,5 @@
 ^ma206equations\.Rproj$
 ^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

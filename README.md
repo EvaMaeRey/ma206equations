@@ -30,7 +30,11 @@ data visualization or descriptive prose that power is even greater.
 However, using equations in these contexts is often done by typing in a
 typesetting version of the equation that may not be awkward. Consider
 the probability density function for the normal distribution, centered
-at \(\mu\) with a standard deviation of \(\sigma\):
+at
+![\\mu](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmu
+"\\mu") with a standard deviation of
+![\\sigma](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csigma
+"\\sigma"):
 
 \[drop rendered version in here\]
 
@@ -88,7 +92,7 @@ ggxmean:::stamp_space() +
 # Details of Our Implementation
 
 ``` r
-code <- readLines("functions.R")
+code <- readLines("R/functions.R")
 ```
 
 ``` r
@@ -129,12 +133,17 @@ ggplot() +
 
 ![](README_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
 
-\(\sqrt{3x-1}+(1+x)^2\)
+![\\sqrt{3x-1}+(1+x)^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csqrt%7B3x-1%7D%2B%281%2Bx%29%5E2
+"\\sqrt{3x-1}+(1+x)^2")
 
-\(z=\frac{\hat{p}-\pi}{SD_{null}}\), where
-\(SD_{null}=\sqrt{\frac{\pi_{0}*(1-\pi_{0})}{n}}\)
+![z=\\frac{\\hat{p}-\\pi}{SD\_{null}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;z%3D%5Cfrac%7B%5Chat%7Bp%7D-%5Cpi%7D%7BSD_%7Bnull%7D%7D
+"z=\\frac{\\hat{p}-\\pi}{SD_{null}}"), where
+![SD\_{null}=\\sqrt{\\frac{\\pi\_{0}\*(1-\\pi\_{0})}{n}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;SD_%7Bnull%7D%3D%5Csqrt%7B%5Cfrac%7B%5Cpi_%7B0%7D%2A%281-%5Cpi_%7B0%7D%29%7D%7Bn%7D%7D
+"SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}")
 
-\[\alpha\]
+  
+![\\alpha](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Calpha
+"\\alpha")  
 
 # How do we write a package?
 
@@ -171,3 +180,89 @@ proportion) and .rmd documents.
 
   - create a github account for collaboration <https://github.com/>
   - we’ll make the repository available in this account
+
+<!-- end list -->
+
+``` r
+plotmath_ev <- latex2exp::TeX("$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$")
+plotmath_var <- latex2exp::TeX("$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$")
+plotmath_sd <- latex2exp::TeX("$\\sigma_x = SD(X) = \\sqrt{Var(X)}$")
+
+
+
+### stamp equation example
+stamp_one_plus_one <- function(x = 0, y = 0, ...){
+
+  annotate(geom = "text",
+           label = "1 + 1",
+           parse = T,
+           x = x, y = y, ...)
+
+}
+
+library(tidyverse)
+ggplot2::ggplot() +
+  stamp_one_plus_one() +
+  stamp_one_plus_one(size = 12, y = 2)
+```
+
+![](README_files/figure-gfm/more%20examples-1.png)<!-- -->
+
+``` r
+tibble::tibble(event = c("totaled", "fender bender", "accident free"),
+       probability = c(.01, .09, .9),
+       payout = c(20000, 5000, 0)) ->
+  expected
+
+
+expected %>%
+  ggplot() +
+  aes(x = payout, y = probability) +
+  geom_point() +
+  geom_segment(aes(xend = payout, yend = 0)) +
+  geom_text(aes(label = probability), size = 5,
+            vjust = -.5, color = "black") +
+  geom_vline(xintercept = sum(c(.01*20000, .09*5000)),
+             linetype = "dashed", color = "black") +
+  labs(subtitle = "Course idea 8:  The expected value E.V. is the 'balancing point' of a Random variable, X.  It is the weighted average of values, (weighting values by their probabilities). In large samples from the X, the average will be close to the E.V.;" %>% str_wrap(60)) +
+  annotate(geom = "label", x =sum(c(.01*20000, .09*5000)), label = sum(c(.01*20000, .09*5000)), y = .5 ) +
+  scale_y_continuous(limits = c(0,1)) +
+  annotate(geom = "text", label = "E * '[' *X * ']' * {phantom() == phantom()} * x[1]*p[1] + x[2]*p[2] + x[3]*p[3]*...x[n]*p[n] * {phantom() == phantom()} * sum(x[i]*p[i], 1, n) ", parse = T,
+           x = 12000, y = .95) +
+  annotate(geom = "text", label = "Var(X) * {phantom() == phantom()} * E * '[' *(X - mu)^{2} * ']' * {phantom() == phantom()} * sigma[x]^{2} * {phantom() == phantom()} * sum(, 1, n)*(x[i] - mu)^{2}*p[i] ", parse = T,
+           x = 12000, y = .8) +
+  annotate(geom = "text", label = "sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) ", parse = T,
+           x = 12000, y = .65)
+```
+
+![](README_files/figure-gfm/more%20examples-2.png)<!-- -->
+
+``` r
+stamp_eq_ev <- function(x = 0,  y = 0){
+
+  # your work here
+
+}
+
+
+stamp_eq_var <- function(x = 0,  y = 0){
+
+  # your work here
+
+}
+
+stamp_eq_sd <- function(x = 0,  y = 0){
+
+  # your work here
+
+}
+
+
+
+ggplot() +
+  stamp_eq_ev() +
+  stamp_eq_var(y = -1)+
+  stamp_eq_sd(y = -2)
+```
+
+![](README_files/figure-gfm/more%20examples-3.png)<!-- -->
