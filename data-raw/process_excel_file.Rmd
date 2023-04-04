@@ -1,0 +1,42 @@
+---
+title: "Untitled"
+author: "Evangeline Reynolds"
+date: "4/4/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+readLines("equations_template") %>% 
+  paste(collapse = "\\n") -> functions_and_documentation_template
+
+library(tidyverse)
+read.csv("ma389_stats_formulas.csv")[2:7] %>% 
+  janitor::clean_names() %>%
+  mutate(r_file_content_stamps = functions_and_documentation_template %>% 
+           str_replace_all("function_name_from_spreadsheet", stamp_function_name) %>% 
+           str_replace_all("full_description_from_spreadsheet", paste(description, "in the ", 
+                                                                  context, "context.", long_description)) %>% 
+           str_replace_all("plotmath_input_from_spreadsheet", plotmath))   ->
+df_with_documentation
+
+for (i in 1:nrow(df_with_documentation)){
+  
+  writeLines(df_with_documentation$r_file_content_stamps[i] %>% stringr::str_split_1("\\\\n"), 
+             paste0("../R/", df_with_documentation$stamp_function_name[i], ".R") 
+             )
+  
+}
+
+
+```
+

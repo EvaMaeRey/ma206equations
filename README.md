@@ -1,11 +1,8 @@
 
-See also:
-<https://github.com/EvaMaeRey/ay_2023_2_advanced_individual_study>
-
 ## Title
 
-Building an R package to deliver easy-to-use equations in prose and
-plots for intro to statistics and probability curricula
+Delivering type-setting equations in prose and plots as functions for
+statistics and probability curricula
 
 ## Abstract
 
@@ -17,7 +14,7 @@ equations in prose or plots could be beneficial for students and
 instructors alike. The goal of this independent study is to create
 functions that will quickly deliver the typed versions of equations that
 translate into beautiful printed versions. We will store the typed
-versions and thoughtfully crafted R functions to make these typed out
+versions and thoughtfully crafted R functions to make these typed
 equations easily accessible. The functions will be bundled into an R
 package.
 
@@ -36,7 +33,7 @@ at
 ![\\sigma](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csigma
 "\\sigma"):
 
-\[drop rendered version in here\]
+<img src="README_files/figure-gfm/unnamed-chunk-1-1.png" width="20%" />
 
 The typed version of this equation which follows is a distant cousin
 from its beautiful rendered kin above:
@@ -65,7 +62,7 @@ ggxmean:::stamp_space() +
                       y = .44)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 <!-- Fortunately, a translater exists. -->
 
 <!-- ```{r} -->
@@ -97,6 +94,219 @@ code <- readLines("R/functions.R")
 
 ``` r
 # Some functions here
+#' stamp_eq_expected_value
+#'
+#' @description Provides expected value equation for display on ggplot figure
+#'
+#' @param x a numeric indicating position on x axis
+#' @param y a numeric indicating position on y axis
+#' @param ...
+#'
+#' @return a ggplot2 stamp layer
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#'    ggplot() +
+#'    stamp_eq_expected_value()
+stamp_eq_expected_value <- function(x = 0,  y = 0, ...){
+
+  plotmath_expected_value <- "E * '[' *X * ']' * {phantom() == phantom()} * x[1]*p[1] + x[2]*p[2] + x[3]*p[3]*...x[n]*p[n] * {phantom() == phantom()} * sum(x[i]*p[i], 1, n) "
+
+  ggplot2::annotate(geom = "text",
+           label = plotmath_expected_value,
+           parse = T,
+           x = x, y = y, ...)
+
+}
+
+
+# Some functions here
+#' stamp_eq_variance
+#'
+#' @description Provides variance equation for display on ggplot figure
+#'
+#' @param x a numeric indicating position on x axis
+#' @param y a numeric indicating position on y axis
+#' @param ...
+#'
+#' @return a ggplot2 stamp layer
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#'    ggplot() +
+#'    stamp_eq_variance()
+stamp_eq_variance <- function(x = 0,  y = 0, ...){
+
+  plotmath_variance <- "Var(X) * {phantom() == phantom()} * E * '[' *(X - mu)^{2} * ']' * {phantom() == phantom()} * sigma[x]^{2} * {phantom() == phantom()} * sum(, 1, n)*(x[i] - mu)^{2}*p[i] "
+
+  annotate(geom = "text",
+           label = plotmath_variance,
+           parse = T,
+           x = x, y = y, ... )
+
+}
+
+
+# Some functions here
+#' stamp_eq_standard_deviation
+#'
+#' @description Provides standard deviation equation for display on ggplot figure
+#'
+#' @param x a numeric indicating position on x axis
+#' @param y a numeric indicating position on y axis
+#' @param ...
+#'
+#' @return a ggplot2 stamp layer
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#'    ggplot() +
+#'    stamp_eq_standard_deviation()
+stamp_eq_standard_deviation <- function(x = 0,  y = 0, ...){
+
+  plotmath_standard_deviation <- "sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) "
+
+  annotate(geom = "text",
+           label = plotmath_standard_deviation,
+           parse = T,
+           x = x, y = y, ...)
+
+}
+
+
+
+# Some functions here
+#' stamp_eq_t_confidence_interval
+#'
+#' @description Provides confidence interval equation for display on ggplot figure
+#'
+#' @param x a numeric indicating position on x axis
+#' @param y a numeric indicating position on y axis
+#' @param ...
+#'
+#' @return a ggplot2 stamp layer
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#'    ggplot() +
+#'    stamp_eq_t_confidence_interval()
+stamp_eq_t_confidence_interval <- function(x = 0, y = 0, ...){
+
+
+  confidence_interval <- "se * {phantom() == phantom()} * sqrt(frac(hat(p)(1 - hat(p)), n), )"
+
+  annotate(geom = "text",
+           label = confidence_interval,
+           parse = T,
+           x = x, y = y, ...)
+
+}
+
+
+
+
+# Some functions here
+#' stamp_eq_sd_null_t_test
+#'
+#' @description Provides standard deviation equation for display on ggplot figure
+#'
+#' @param x a numeric indicating position on x axis
+#' @param y a numeric indicating position on y axis
+#' @param ...
+#'
+#' @return a ggplot2 stamp layer
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#'    ggplot() +
+#'    stamp_eq_sd_null_t_test()
+stamp_eq_sd_null_t_test <- function(x = 0, y = 0, ...){
+
+  sd_null_t_test <- "se * {phantom() == phantom()} * sqrt(frac(hat(p)(1 - hat(p)), n), )"
+
+  annotate(geom = "text",
+           label = sd_null_t_test,
+           parse = T,
+           x = x, y = y, ...)
+
+}
+
+
+
+# ggplot() +
+#
+#   stamp_eq_ci(y = 2)
+#
+#
+#
+# stamp_eq_sd_null_t_test <- function(x = 0, y = 0, ...){
+#
+#
+#
+#   annotate(geom = "text",
+#
+#            label = "sd[null] * {phantom() == phantom()} * s / sqrt(n, )",
+#
+#            parse = T,
+#
+#            x = x, y = y, ...)
+#
+# }
+#
+#
+#
+# ggplot() +
+#
+#   stamp_eq_sd_null_t_test(y = 2)
+#
+#
+#
+# stamp_eq_se_t_test <- function(x = 0, y = 0, ...){
+#
+#
+#
+#   annotate(geom = "text",
+#
+#            label = "se * {phantom() == phantom()} * s / sqrt(n, ) ",
+#
+#            parse = T,
+#
+#            x = x, y = y, ...)
+#
+# }
+#
+#
+#
+# ggplot() +
+#
+#   stamp_eq_se_t_test(y = 2)
+#
+#
+#
+# stamp_statistic <- function(x = 0, y = 0, ...){
+#
+#
+#
+#   annotate(geom = "text",
+#
+#            label = "se * {phantom() == phantom()} * s / sqrt(n, ) ",
+#
+#            parse = T,
+#
+#            x = x, y = y, ...)
+#
+# }
+#
+#
+#
+# ggplot() +
+#
+#   stamp_statistic(y = 2)
 ```
 
 The equations in the plot were produce in the following fashion (no
@@ -121,7 +331,7 @@ ggplot() +
            color = "grey25", size = 4)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ``` r
 ggplot() +
@@ -131,7 +341,7 @@ ggplot() +
            color = "grey25", size = 4)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
 
 ![\\sqrt{3x-1}+(1+x)^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csqrt%7B3x-1%7D%2B%281%2Bx%29%5E2
 "\\sqrt{3x-1}+(1+x)^2")
@@ -144,6 +354,13 @@ ggplot() +
   
 ![\\alpha](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Calpha
 "\\alpha")  
+
+-----
+
+# Project refereences:
+
+See also:
+<https://github.com/EvaMaeRey/ay_2023_2_advanced_individual_study>
 
 # How do we write a package?
 

@@ -1,0 +1,25 @@
+#' function_name_from_spreadsheet
+#'
+#' @description full_description_from_spreadsheet
+#'
+#' @param x a numeric indicating position on x axis
+#' @param y a numeric indicating position on y axis
+#' @param ...
+#'
+#' @return a ggplot2 annotation layer which is the plotmath version of a function
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' ggplot() +
+#'    function_name_from_spreadsheet()
+function_name_from_spreadsheet <- function(x = 0,  y = 0, ...){
+
+  plotmath_input <- "plotmath_input_from_spreadsheet"
+
+  annotate(geom = "text",
+           label = plotmath_input,
+           parse = T,
+           x = x, y = y, ... )
+
+}
