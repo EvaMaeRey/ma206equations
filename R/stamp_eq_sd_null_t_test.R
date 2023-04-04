@@ -17,7 +17,7 @@ stamp_eq_sd_null_t_test <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- "sd[null] * {phantom() == phantom()} * s / sqrt(n, ) "
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

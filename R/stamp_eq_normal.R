@@ -17,7 +17,7 @@ stamp_eq_normal <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- "p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} "
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

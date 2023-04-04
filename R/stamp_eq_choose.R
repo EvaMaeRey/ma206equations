@@ -17,7 +17,7 @@ stamp_eq_choose <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- "{}[n]*C[r] * {phantom() == phantom()} * frac(n*'!', r*'!'(n - r)*'!')"
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

@@ -17,7 +17,7 @@ stamp_eq_sd <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- "sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) "
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

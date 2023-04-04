@@ -20,7 +20,7 @@ stamp_eq_ci <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- " se * {phantom() == phantom()} * sqrt(frac(hat(p)(1 - hat(p)), n), ) "
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

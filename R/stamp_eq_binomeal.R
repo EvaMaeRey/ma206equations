@@ -17,7 +17,7 @@ stamp_eq_binomeal <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- " {{{}[N]}*C * {{}[k]}} %.% p^{k}*q^{N - k}"
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

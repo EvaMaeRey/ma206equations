@@ -17,7 +17,7 @@ function_name_from_spreadsheet <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- "plotmath_input_from_spreadsheet"
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

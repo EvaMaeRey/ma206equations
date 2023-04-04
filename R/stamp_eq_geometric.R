@@ -17,7 +17,7 @@ stamp_eq_geometric <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- "(1 - p)^{n - 1} ~ symbol('*') ~ p "
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

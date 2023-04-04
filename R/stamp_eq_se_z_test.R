@@ -17,7 +17,7 @@ stamp_eq_se_z_test <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- "sd[null] * {phantom() == phantom()} * sqrt(hat(p) ~ symbol('*') ~ (1 - hat(p)) ~ symbol('*') ~ (frac(1, n[1]) * phantom(.) + frac(1, n[2]) * phantom(.)), ) "
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )

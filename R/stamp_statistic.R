@@ -17,7 +17,7 @@ stamp_statistic <- function(x = 0,  y = 0, ...){
 
   plotmath_input <- "plain(stat) * {phantom() == phantom()} * hat(p[1]) - hat(p[2]) "
 
-  annotate(geom = "text",
+  ggplot2::annotate(geom = "text",
            label = plotmath_input,
            parse = T,
            x = x, y = y, ... )
