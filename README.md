@@ -1,5 +1,5 @@
 
-## Title
+# ma206equations <img src="man/figures/logo.png" align="right" height="120" />
 
 Delivering type-setting equations in prose and plots as functions for
 statistics and probability curricula
@@ -25,15 +25,14 @@ probabilistic and statistical concept. When notation is combined with
 data visualization or descriptive prose that power is even greater.
 
 However, using equations in these contexts is often done by typing in a
-typesetting version of the equation that may not be awkward. Consider
-the probability density function for the normal distribution, centered
-at
+typesetting version of the equation; this can be awkward. Consider the
+probability density function for the normal distribution, centered at
 ![\\mu](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmu
 "\\mu") with a standard deviation of
 ![\\sigma](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csigma
 "\\sigma"):
 
-<img src="README_files/figure-gfm/unnamed-chunk-1-1.png" width="20%" />
+<img src="man/figures/unnamed-chunk-3-1.png" width="20%" />
 
 The typed version of this equation which follows is a distant cousin
 from its beautiful rendered kin above:
@@ -62,7 +61,7 @@ ggxmean:::stamp_space() +
                       y = .44)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 <!-- Fortunately, a translater exists. -->
 
 <!-- ```{r} -->
@@ -71,12 +70,86 @@ ggxmean:::stamp_space() +
 
 <!-- ``` -->
 
+Consider Ian Stewart’s poster below, ‘Equations that changed the world.’
+We see the equations themselves and a verbal way to refer to the
+equations - the equation’s name. The typesetting version, thankfully,
+does not appear.
+
+In a setting where you are using software, it might be preferable to
+refer to the equation by name rather than always typing of the
+typesetting version. For example `typeset_pathagoreans()` could return
+`$ a^2 + b^2 = c^2 $` which could be copy and pasted or used dynamically
+in a hybrid prose/code document like jupiter notebooks, rmarkdown, or
+quarto.
+
+``` r
+knitr::include_graphics("man/figures/equations_that_changed_world.png")
+```
+
+<img src="man/figures/equations_that_changed_world.png" width="543" />
+
 # A different work flow within intro probability and statistics course work…
 
 What if we could call a function to get back the text that will render
 to our beautiful equations. For example a function like
 `return_equation_normal()` could be called to get the typed version of
 the prose and `stamp_eq_normal()` for use in ggplot2.
+
+# ‘data’ collection
+
+A large part of this project was thinking about which equations are
+relevant for a course like ma206.
+
+``` r
+read.csv("data-raw/ma389_stats_formulas.csv") |> tail(7) |> knitr::kable()
+```
+
+|    |  X | mathjax                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | description            | context                               | plotmath                                                                                                                                                                               | stamp\_function\_name | long\_description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :- | -: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------- | :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 10 | 10 | ![E\[X\] = x\_1p\_1 + x\_2p\_2 + x\_3p\_3 ...x\_np\_n = \\\\sum\_1^n{x\_ip\_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5C%5Csum_1%5En%7Bx_ip_i%7D "E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\\\sum_1^n{x_ip_i}")                                                                                                                                                                    | Expected Value         | Probability Distributions             | E \* ‘\[’ *X * ’\]’ \* {phantom() == phantom()} \* x\[1\]*p\[1\] + x\[2\]*p\[2\] + x\[3\]*p\[3\]*…x\[n\]*p\[n\] * {phantom() == phantom()} \* sum(x\[i\]\*p\[i\], 1, n)                | stamp\_eq\_ev         | The expected value of a probability distribution is a measure of the central tendency of the distribution, and represents the average or mean value that we would expect to observe if we were to repeat the random experiment many times. The expected value is a useful statistic because it provides a single number that summarizes the distribution of values that can be observed. It can be used to make predictions about future outcomes, as well as to assess the performance of statistical models or experimental designs. |
+| 11 | 11 | ![Var(X) = E\[(X-\\\\mu)^2\] = \\\\sigma^2\_x = \\\\sum\_1^n(x\_i-\\\\mu)^2p\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Var%28X%29%20%3D%20E%5B%28X-%5C%5Cmu%29%5E2%5D%20%3D%20%5C%5Csigma%5E2_x%20%3D%20%5C%5Csum_1%5En%28x_i-%5C%5Cmu%29%5E2p_i "Var(X) = E[(X-\\\\mu)^2] = \\\\sigma^2_x = \\\\sum_1^n(x_i-\\\\mu)^2p_i")                                                                                                                                       | Variance               | Description of the spread of the Data | Var(X) \* {phantom() == phantom()} \* E \* ‘\[’ *(X - mu)^{2} * ’\]’ \* {phantom() == phantom()} \* sigma\[x\]^{2} \* {phantom() == phantom()} \* sum(, 1, n)*(x\[i\] - mu)^{2}*p\[i\] | stamp\_eq\_var        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 12 | 12 | ![\\\\sigma\_x = SD(X) = \\\\sqrt{Var(X)}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%5Csigma_x%20%3D%20SD%28X%29%20%3D%20%5C%5Csqrt%7BVar%28X%29%7D "\\\\sigma_x = SD(X) = \\\\sqrt{Var(X)}")                                                                                                                                                                                                                                                                     | standard deviation     | Description of the spread of the Data | sigma\[x\] \* {phantom() == phantom()} \* SD(X) \* {phantom() == phantom()} \* sqrt(Var(X), )                                                                                          | stamp\_eq\_sd         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 13 | 13 | ![\#p(x) = \\\\frac{1}{\\\\sqrt{ 2 \\\\pi \\\\sigma^2 }} e^{ - \\\\frac{ (x - \\\\mu)^2 } {2 \\\\sigma^2} }](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%23p%28x%29%20%3D%20%5C%5Cfrac%7B1%7D%7B%5C%5Csqrt%7B%202%20%5C%5Cpi%20%5C%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5C%5Cfrac%7B%20%28x%20-%20%5C%5Cmu%29%5E2%20%7D%20%7B2%20%5C%5Csigma%5E2%7D%20%7D "#p(x) = \\\\frac{1}{\\\\sqrt{ 2 \\\\pi \\\\sigma^2 }} e^{ - \\\\frac{ (x - \\\\mu)^2 } {2 \\\\sigma^2} }") | Normal Distribution    | Probability                           | p(x) \* {phantom() == phantom()} \* frac(1, sqrt(2*pi*sigma^{2}, )) \* phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})}                                                      | stamp\_eq\_normal     | Normal distribution: The normal distribution is one of the most commonly used probability distributions in statistics, and is often used to model continuous variables that are approximately normally distributed. In R, the normal distribution is implemented using the dnorm(), pnorm(), qnorm(), and rnorm() functions.                                                                                                                                                                                                           |
+| 14 | 14 | ![{{\_N}C{\_k}} \\\\cdot p^kq^{N-k}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7B%7B_N%7DC%7B_k%7D%7D%20%5C%5Ccdot%20p%5Ekq%5E%7BN-k%7D "{{_N}C{_k}} \\\\cdot p^kq^{N-k}")                                                                                                                                                                                                                                                                                           | Binomial Distribution  | Probability                           | {{{}\[N\]}*C * {{}\[k\]}} %.% p^{k}\*q^{N - k}                                                                                                                                         | stamp\_eq\_binomial   | the binomial distribution provides a way to model the probability of observing a specific number of successes in a fixed number of trials, based on the underlying probability of success on each trial. This can be useful for making predictions, testing hypotheses, and assessing the reliability or efficiency of a process.                                                                                                                                                                                                      |
+| 15 | 15 | ![(1-p)^(n-1)\*p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%281-p%29%5E%28n-1%29%2Ap "(1-p)^(n-1)*p")                                                                                                                                                                                                                                                                                                                                                                | Geometric Distribution | Probability                           | (1 - p)^{n - 1} \~ symbol(’\*’) \~ p                                                                                                                                                   | stamp\_eq\_geometric  | In each of these situations, the geometric distribution provides a way to model the probability of observing a specific number of trials until the first success occurs, based on the underlying probability of success on each trial. This can be useful for making predictions, designing experiments or systems, and assessing the reliability or efficiency of a process.                                                                                                                                                          |
+| 16 | 16 | ![n\!\\\\(r\!\*(n-r)\!)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%21%5C%5C%28r%21%2A%28n-r%29%21%29 "n!\\\\(r!*(n-r)!)")                                                                                                                                                                                                                                                                                                                                           | Choose Equation        | Probability                           | {}\[n\]*C\[r\] * {phantom() == phantom()} \* frac(n*‘\!’, r*’\!’(n - r)\*‘\!’)                                                                                                         | stamp\_eq\_choose     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+
+``` r
+# for preparation of stamp functions
+readLines("data-raw/plotmath_equations_template.txt")
+```
+
+    ##  [1] "# Note: do not edit .R file directly; file created from equations_temlapte.txt file"
+    ##  [2] ""                                                                                   
+    ##  [3] "#' function_name_from_spreadsheet"                                                  
+    ##  [4] "#'"                                                                                 
+    ##  [5] "#' @description full_description_from_spreadsheet"                                  
+    ##  [6] "#'"                                                                                 
+    ##  [7] "#' @param x a numeric indicating position on x axis"                                
+    ##  [8] "#' @param y a numeric indicating position on y axis"                                
+    ##  [9] "#' @param ..."                                                                      
+    ## [10] "#'"                                                                                 
+    ## [11] "#' @return a ggplot2 annotation layer which is the plotmath version of a function"  
+    ## [12] "#' @export"                                                                         
+    ## [13] "#'"                                                                                 
+    ## [14] "#' @examples"                                                                       
+    ## [15] "#' library(ggplot2)"                                                                
+    ## [16] "#' ggplot() +"                                                                      
+    ## [17] "#'    function_name_from_spreadsheet()"                                             
+    ## [18] "function_name_from_spreadsheet <- function(x = 0,  y = 0, ...){"                    
+    ## [19] ""                                                                                   
+    ## [20] "  plotmath_input <- \"plotmath_input_from_spreadsheet\""                            
+    ## [21] ""                                                                                   
+    ## [22] "  ggplot2::annotate(geom = \"text\","                                               
+    ## [23] "           label = plotmath_input,"                                                 
+    ## [24] "           parse = T,"                                                              
+    ## [25] "           x = x, y = y, ... )"                                                     
+    ## [26] ""                                                                                   
+    ## [27] "}"
+
+To see exactly how we used the template to generate all the functions
+for this package, see the processing code
+[here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd).
 
 ``` r
 library(ggplot2)
@@ -85,229 +158,6 @@ ggxmean:::stamp_space() +
 ```
 
 # Solution: package with key equations
-
-# Details of Our Implementation
-
-``` r
-code <- readLines("R/functions.R")
-```
-
-``` r
-# Some functions here
-#' stamp_eq_expected_value
-#'
-#' @description Provides expected value equation for display on ggplot figure
-#'
-#' @param x a numeric indicating position on x axis
-#' @param y a numeric indicating position on y axis
-#' @param ...
-#'
-#' @return a ggplot2 stamp layer
-#' @export
-#'
-#' @examples
-#' library(ggplot2)
-#'    ggplot() +
-#'    stamp_eq_expected_value()
-stamp_eq_expected_value <- function(x = 0,  y = 0, ...){
-
-  plotmath_expected_value <- "E * '[' *X * ']' * {phantom() == phantom()} * x[1]*p[1] + x[2]*p[2] + x[3]*p[3]*...x[n]*p[n] * {phantom() == phantom()} * sum(x[i]*p[i], 1, n) "
-
-  ggplot2::annotate(geom = "text",
-           label = plotmath_expected_value,
-           parse = T,
-           x = x, y = y, ...)
-
-}
-
-
-# Some functions here
-#' stamp_eq_variance
-#'
-#' @description Provides variance equation for display on ggplot figure
-#'
-#' @param x a numeric indicating position on x axis
-#' @param y a numeric indicating position on y axis
-#' @param ...
-#'
-#' @return a ggplot2 stamp layer
-#' @export
-#'
-#' @examples
-#' library(ggplot2)
-#'    ggplot() +
-#'    stamp_eq_variance()
-stamp_eq_variance <- function(x = 0,  y = 0, ...){
-
-  plotmath_variance <- "Var(X) * {phantom() == phantom()} * E * '[' *(X - mu)^{2} * ']' * {phantom() == phantom()} * sigma[x]^{2} * {phantom() == phantom()} * sum(, 1, n)*(x[i] - mu)^{2}*p[i] "
-
-  annotate(geom = "text",
-           label = plotmath_variance,
-           parse = T,
-           x = x, y = y, ... )
-
-}
-
-
-# Some functions here
-#' stamp_eq_standard_deviation
-#'
-#' @description Provides standard deviation equation for display on ggplot figure
-#'
-#' @param x a numeric indicating position on x axis
-#' @param y a numeric indicating position on y axis
-#' @param ...
-#'
-#' @return a ggplot2 stamp layer
-#' @export
-#'
-#' @examples
-#' library(ggplot2)
-#'    ggplot() +
-#'    stamp_eq_standard_deviation()
-stamp_eq_standard_deviation <- function(x = 0,  y = 0, ...){
-
-  plotmath_standard_deviation <- "sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) "
-
-  annotate(geom = "text",
-           label = plotmath_standard_deviation,
-           parse = T,
-           x = x, y = y, ...)
-
-}
-
-
-
-# Some functions here
-#' stamp_eq_t_confidence_interval
-#'
-#' @description Provides confidence interval equation for display on ggplot figure
-#'
-#' @param x a numeric indicating position on x axis
-#' @param y a numeric indicating position on y axis
-#' @param ...
-#'
-#' @return a ggplot2 stamp layer
-#' @export
-#'
-#' @examples
-#' library(ggplot2)
-#'    ggplot() +
-#'    stamp_eq_t_confidence_interval()
-stamp_eq_t_confidence_interval <- function(x = 0, y = 0, ...){
-
-
-  confidence_interval <- "se * {phantom() == phantom()} * sqrt(frac(hat(p)(1 - hat(p)), n), )"
-
-  annotate(geom = "text",
-           label = confidence_interval,
-           parse = T,
-           x = x, y = y, ...)
-
-}
-
-
-
-
-# Some functions here
-#' stamp_eq_sd_null_t_test
-#'
-#' @description Provides standard deviation equation for display on ggplot figure
-#'
-#' @param x a numeric indicating position on x axis
-#' @param y a numeric indicating position on y axis
-#' @param ...
-#'
-#' @return a ggplot2 stamp layer
-#' @export
-#'
-#' @examples
-#' library(ggplot2)
-#'    ggplot() +
-#'    stamp_eq_sd_null_t_test()
-stamp_eq_sd_null_t_test <- function(x = 0, y = 0, ...){
-
-  sd_null_t_test <- "se * {phantom() == phantom()} * sqrt(frac(hat(p)(1 - hat(p)), n), )"
-
-  annotate(geom = "text",
-           label = sd_null_t_test,
-           parse = T,
-           x = x, y = y, ...)
-
-}
-
-
-
-# ggplot() +
-#
-#   stamp_eq_ci(y = 2)
-#
-#
-#
-# stamp_eq_sd_null_t_test <- function(x = 0, y = 0, ...){
-#
-#
-#
-#   annotate(geom = "text",
-#
-#            label = "sd[null] * {phantom() == phantom()} * s / sqrt(n, )",
-#
-#            parse = T,
-#
-#            x = x, y = y, ...)
-#
-# }
-#
-#
-#
-# ggplot() +
-#
-#   stamp_eq_sd_null_t_test(y = 2)
-#
-#
-#
-# stamp_eq_se_t_test <- function(x = 0, y = 0, ...){
-#
-#
-#
-#   annotate(geom = "text",
-#
-#            label = "se * {phantom() == phantom()} * s / sqrt(n, ) ",
-#
-#            parse = T,
-#
-#            x = x, y = y, ...)
-#
-# }
-#
-#
-#
-# ggplot() +
-#
-#   stamp_eq_se_t_test(y = 2)
-#
-#
-#
-# stamp_statistic <- function(x = 0, y = 0, ...){
-#
-#
-#
-#   annotate(geom = "text",
-#
-#            label = "se * {phantom() == phantom()} * s / sqrt(n, ) ",
-#
-#            parse = T,
-#
-#            x = x, y = y, ...)
-#
-# }
-#
-#
-#
-# ggplot() +
-#
-#   stamp_statistic(y = 2)
-```
 
 The equations in the plot were produce in the following fashion (no
 functions or package pre-built):
@@ -331,7 +181,7 @@ ggplot() +
            color = "grey25", size = 4)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/unnamed-chunk-8-1.png)<!-- -->
 
 ``` r
 ggplot() +
@@ -341,7 +191,7 @@ ggplot() +
            color = "grey25", size = 4)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
+![](man/figures/unnamed-chunk-8-2.png)<!-- -->
 
 ![\\sqrt{3x-1}+(1+x)^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csqrt%7B3x-1%7D%2B%281%2Bx%29%5E2
 "\\sqrt{3x-1}+(1+x)^2")
@@ -423,7 +273,7 @@ ggplot2::ggplot() +
   stamp_one_plus_one(size = 12, y = 2)
 ```
 
-![](README_files/figure-gfm/more%20examples-1.png)<!-- -->
+![](man/figures/more%20examples-1.png)<!-- -->
 
 ``` r
 tibble::tibble(event = c("totaled", "fender bender", "accident free"),
@@ -452,7 +302,7 @@ expected %>%
            x = 12000, y = .65)
 ```
 
-![](README_files/figure-gfm/more%20examples-2.png)<!-- -->
+![](man/figures/more%20examples-2.png)<!-- -->
 
 ``` r
 stamp_eq_ev <- function(x = 0,  y = 0){
@@ -482,4 +332,4 @@ ggplot() +
   stamp_eq_sd(y = -2)
 ```
 
-![](README_files/figure-gfm/more%20examples-3.png)<!-- -->
+![](man/figures/more%20examples-3.png)<!-- -->

@@ -3,7 +3,64 @@ output: github_document
 ---
 
 
-## Title 
+```{r setup, include = F}
+knitr::opts_chunk$set(fig.path = "man/figures/")
+
+```
+
+
+```{r, eval = F, echo = F}
+library(tidyverse)
+library(ggstamp)  
+library(ggxmean)
+set.seed(1243)
+ggcanvas() + 
+  stamp_wash(fill = "slategrey", alpha = 1) + 
+  # stamp_normal_dist(height = 20) +
+  ma206equations::stamp_eq_normal(color = "oldlace",
+                                    size = runif(10)*10,
+                                  fontface = "bold",
+                                    y = runif(10)-.5, 
+                                    alpha = .8,
+                                    x = runif(10)-.5)  + 
+    ma206equations::stamp_eq_choose(color = "oldlace",
+                                    size = runif(10)*10,
+                                  fontface = "bold",
+                                    y = runif(10)-.5, 
+                                    alpha = .8,
+                                    x = runif(10)-.5)  + 
+      ma206equations::stamp_eq_variance(color = "oldlace",
+                                    size = runif(10)*10,
+                                  fontface = "bold",
+                                    y = runif(10)-.5, 
+                                    alpha = .8,
+                                    x = runif(10)-.5)  + 
+    stamp_text( y = 0, x = 0,
+             label = "ma206equations",
+             color = "black", size = 12) + 
+    stamp_polygon(radius = .75, x0 = 0, y0 = 0,
+                alpha = 0, size = 7,
+                color = alpha("goldenrod3", .9)) +
+    stamp_polygon_inverse(radius = .75, radius_outer = Inf, x0 = 0, y0 = 0,
+                        fill = "white", color = "red"
+                         ) +
+  theme_void_fill(fill = "white") +
+  NULL
+  
+```
+
+
+```{r, eval = F, echo = F}
+ggsave("hex_sticker_dist.png", dpi = 320) 
+magick::image_read("hex_sticker_dist.png") %>% 
+  magick::image_fill("transparent",  "+40+40", fuzz = 40) %>% 
+  magick::image_write("hex_sticker_dist.png")
+
+knitr::include_graphics("hex_sticker_dist.png")
+```
+
+
+# ma206equations <img src="man/figures/logo.png" align="right" height="120" />
 
 Delivering type-setting equations in prose and plots as functions for statistics and probability curricula
 
@@ -16,7 +73,7 @@ Mathematical fluency involves frequent use of equations. However, typing out equ
 
 Using mathematical notation is a powerful way to communicate about probabilistic and statistical concept.  When notation is combined with data visualization or descriptive prose that power is even greater.  
 
-However, using equations in these contexts is often done by typing in a typesetting version of the equation that may not be awkward.  Consider the probability density function for the normal distribution, centered at $\mu$ with a standard deviation of $\sigma$:
+However, using equations in these contexts is often done by typing in a typesetting version of the equation; this can be awkward.  Consider the probability density function for the normal distribution, centered at $\mu$ with a standard deviation of $\sigma$:
 
 ```{r, warning=F, out.width="20%", echo = F}
 math_plot_normal <- "p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} "
@@ -59,10 +116,32 @@ ggxmean:::stamp_space() +
 <!-- exp_to_plot <- latex2exp::TeX("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$") -->
 <!-- ``` -->
 
+Consider Ian Stewart's poster below, 'Equations that changed the world.'  We see the equations themselves and a verbal way to refer to the equations - the equation's name.  The typesetting version, thankfully, does not appear.  
+
+In a setting where you are using software, it might be preferable to refer to the equation by name rather than always typing of the typesetting version.  For example `typeset_pathagoreans()` could return `$ a^2 + b^2 = c^2 $` which could be copy and pasted or used dynamically in a hybrid prose/code document like jupiter notebooks, rmarkdown, or quarto.  
+
+```{r}
+knitr::include_graphics("man/figures/equations_that_changed_world.png")
+```
+
+
 # A different work flow within intro probability and statistics course work...
 
 What if we could call a function to get back the text that will render to our beautiful equations. For example a function like `return_equation_normal()` could be called to get the typed version of the prose and `stamp_eq_normal()` for use in ggplot2.
 
+# 'data' collection
+
+A large part of this project was thinking about which equations are relevant for a course like ma206. 
+
+```{r}
+read.csv("data-raw/ma389_stats_formulas.csv") |> tail(7) |> knitr::kable()
+
+# for preparation of stamp functions
+readLines("data-raw/plotmath_equations_template.txt")
+
+```
+
+To see exactly how we used the template to generate all the functions for this package, see the processing code [here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd).
 
 ```{r, eval = F}
 library(ggplot2)
@@ -75,19 +154,6 @@ ggxmean:::stamp_space() +
 # Solution: package with key equations
 
 
-
-
-
-
-# Details of Our Implementation
-
-```{r}
-code <- readLines("R/functions.R")
-```
-
-```{r, code = code}
-
-```
 
 The equations in the plot were produce in the following fashion (no functions or package pre-built): 
 

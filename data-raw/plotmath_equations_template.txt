@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' function_name_from_spreadsheet
 #'
 #' @description full_description_from_spreadsheet
