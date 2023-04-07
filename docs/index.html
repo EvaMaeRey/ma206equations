@@ -74,7 +74,7 @@
 </h1>
 <p>Using mathematical notation is a powerful way to communicate about probabilistic and statistical concept. When notation is combined with data visualization or descriptive prose that power is even greater.</p>
 <p>However, using equations in these contexts is often done by typing in a typesetting version of the equation; this can be awkward. Consider the probability density function for the normal distribution, centered at <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Cmu%20%22%5Cmu%22" alt="\mu"> with a standard deviation of <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Csigma%20%22%5Csigma%22" alt="\sigma">:</p>
-<p><img src="reference/figures/unnamed-chunk-3-1.png" width="20%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="20%"></p>
 <p>The typed version of this equation which follows is a distant cousin from its beautiful rendered kin above:</p>
 <p><code>p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }</code></p>
 <p>Furthermore, if we want to use annotate a plot with this equation, we would need to use plot math, a different typed syntax.</p>
@@ -92,12 +92,12 @@
 <span>  <span class="fu">ggstamp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggstamp/man/stamp_text_ljust.html" class="external-link">stamp_text_ljust</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"What is the max of this function?"</span>,</span>
 <span>                      x <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, </span>
 <span>                      y <span class="op">=</span> <span class="fl">.44</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-4-1.png"><!-- --><!-- Fortunately, a translater exists. --></p>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"><!-- Fortunately, a translater exists. --></p>
 <!-- ```{r} --><!-- exp_to_plot <- latex2exp::TeX("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$") --><!-- ``` --><p>Consider Ian Stewart’s poster below, ‘Equations that changed the world.’ We see the equations themselves and a verbal way to refer to the equations - the equation’s name. The typesetting version, thankfully, does not appear.</p>
 <p>In a setting where you are using software, it might be preferable to refer to the equation by name rather than always typing of the typesetting version. For example <code>typeset_pathagoreans()</code> could return <code>$ a^2 + b^2 = c^2 $</code> which could be copy and pasted or used dynamically in a hybrid prose/code document like jupiter notebooks, rmarkdown, or quarto.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"man/figures/equations_that_changed_world.png"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/equations_that_changed_world.png" width="543"></p>
+<p><img src="reference/figures/equations_that_changed_world.png" width="100%"></p>
 </div>
 <div class="section level1">
 <h1 id="a-different-work-flow-within-intro-probability-and-statistics-course-work">A different work flow within intro probability and statistics course work…<a class="anchor" aria-label="anchor" href="#a-different-work-flow-within-intro-probability-and-statistics-course-work"></a>
@@ -109,17 +109,19 @@
 </h1>
 <p>A large part of this project was thinking about which equations are relevant for a course like ma206.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"data-raw/ma389_stats_formulas.csv"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"data-raw/ma389_stats_formulas.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">long_description</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="0%">
 <col width="0%">
-<col width="38%">
-<col width="1%">
+<col width="64%">
 <col width="2%">
-<col width="14%">
-<col width="1%">
-<col width="40%">
+<col width="4%">
+<col width="24%">
+<col width="2%">
 </colgroup>
 <thead><tr class="header">
 <th align="left"></th>
@@ -129,7 +131,6 @@
 <th align="left">context</th>
 <th align="left">plotmath</th>
 <th align="left">stamp_function_name</th>
-<th align="left">long_description</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -140,7 +141,6 @@
 <td align="left">Probability Distributions</td>
 <td align="left">E * ‘[’ <em>X </em> ’]’ * {phantom() == phantom()} * x[1]<em>p[1] + x[2]</em>p[2] + x[3]<em>p[3]</em>…x[n]<em>p[n] </em> {phantom() == phantom()} * sum(x[i]*p[i], 1, n)</td>
 <td align="left">stamp_eq_ev</td>
-<td align="left">The expected value of a probability distribution is a measure of the central tendency of the distribution, and represents the average or mean value that we would expect to observe if we were to repeat the random experiment many times. The expected value is a useful statistic because it provides a single number that summarizes the distribution of values that can be observed. It can be used to make predictions about future outcomes, as well as to assess the performance of statistical models or experimental designs.</td>
 </tr>
 <tr class="even">
 <td align="left">11</td>
@@ -150,7 +150,6 @@
 <td align="left">Description of the spread of the Data</td>
 <td align="left">Var(X) * {phantom() == phantom()} * E * ‘[’ <em>(X - mu)^{2} </em> ’]’ * {phantom() == phantom()} * sigma[x]^{2} * {phantom() == phantom()} * sum(, 1, n)<em>(x[i] - mu)^{2}</em>p[i]</td>
 <td align="left">stamp_eq_var</td>
-<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">12</td>
@@ -160,7 +159,6 @@
 <td align="left">Description of the spread of the Data</td>
 <td align="left">sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), )</td>
 <td align="left">stamp_eq_sd</td>
-<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">13</td>
@@ -170,7 +168,6 @@
 <td align="left">Probability</td>
 <td align="left">p(x) * {phantom() == phantom()} * frac(1, sqrt(2<em>pi</em>sigma^{2}, )) * phantom(.)<em>e^{phantom() - frac((x - mu)^{2}, 2</em>sigma^{2})}</td>
 <td align="left">stamp_eq_normal</td>
-<td align="left">Normal distribution: The normal distribution is one of the most commonly used probability distributions in statistics, and is often used to model continuous variables that are approximately normally distributed. In R, the normal distribution is implemented using the dnorm(), pnorm(), qnorm(), and rnorm() functions.</td>
 </tr>
 <tr class="odd">
 <td align="left">14</td>
@@ -180,7 +177,6 @@
 <td align="left">Probability</td>
 <td align="left">{{{}[N]}<em>C </em> {{}[k]}} %.% p<sup>{k}*q</sup>{N - k}</td>
 <td align="left">stamp_eq_binomial</td>
-<td align="left">the binomial distribution provides a way to model the probability of observing a specific number of successes in a fixed number of trials, based on the underlying probability of success on each trial. This can be useful for making predictions, testing hypotheses, and assessing the reliability or efficiency of a process.</td>
 </tr>
 <tr class="even">
 <td align="left">15</td>
@@ -190,7 +186,6 @@
 <td align="left">Probability</td>
 <td align="left">(1 - p)^{n - 1} ~ symbol(’*’) ~ p</td>
 <td align="left">stamp_eq_geometric</td>
-<td align="left">In each of these situations, the geometric distribution provides a way to model the probability of observing a specific number of trials until the first success occurs, based on the underlying probability of success on each trial. This can be useful for making predictions, designing experiments or systems, and assessing the reliability or efficiency of a process.</td>
 </tr>
 <tr class="odd">
 <td align="left">16</td>
@@ -200,42 +195,42 @@
 <td align="left">Probability</td>
 <td align="left">{}[n]<em>C[r] </em> {phantom() == phantom()} * frac(n<em>‘!’, r</em>’!’(n - r)*‘!’)</td>
 <td align="left">stamp_eq_choose</td>
-<td align="left"></td>
 </tr>
 </tbody>
 </table>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># for preparation of stamp functions</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"data-raw/plotmath_equations_template.txt"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">##  [1] "# Note: do not edit .R file directly; file created from equations_temlapte.txt file"</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">##  [2] ""                                                                                   </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">##  [3] "#' function_name_from_spreadsheet"                                                  </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">##  [4] "#'"                                                                                 </span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">##  [5] "#' @description full_description_from_spreadsheet"                                  </span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">##  [6] "#'"                                                                                 </span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">##  [7] "#' @param x a numeric indicating position on x axis"                                </span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">##  [8] "#' @param y a numeric indicating position on y axis"                                </span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">##  [9] "#' @param ..."                                                                      </span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">## [10] "#'"                                                                                 </span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">## [11] "#' @return a ggplot2 annotation layer which is the plotmath version of a function"  </span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">## [12] "#' @export"                                                                         </span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">## [13] "#'"                                                                                 </span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">## [14] "#' @examples"                                                                       </span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">## [15] "#' library(ggplot2)"                                                                </span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">## [16] "#' ggplot() +"                                                                      </span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">## [17] "#'    function_name_from_spreadsheet()"                                             </span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## [18] "function_name_from_spreadsheet &lt;- function(x = 0,  y = 0, ...){"                    </span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">## [19] ""                                                                                   </span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">## [20] "  plotmath_input &lt;- \"plotmath_input_from_spreadsheet\""                            </span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="co">## [21] ""                                                                                   </span></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="co">## [22] "  ggplot2::annotate(geom = \"text\","                                               </span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="co">## [23] "           label = plotmath_input,"                                                 </span></span>
-<span id="cb5-24"><a href="#cb5-24"></a><span class="co">## [24] "           parse = T,"                                                              </span></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="co">## [25] "           x = x, y = y, ... )"                                                     </span></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="co">## [26] ""                                                                                   </span></span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="co">## [27] "}"</span></span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># for preparation of stamp functions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"data-raw/plotmath_equations_template.txt"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "# Note: do not edit .R file directly; file created from equations_temlapte.txt file"</span></span>
+<span><span class="co">#&gt;  [2] ""                                                                                   </span></span>
+<span><span class="co">#&gt;  [3] "#' function_name_from_spreadsheet"                                                  </span></span>
+<span><span class="co">#&gt;  [4] "#'"                                                                                 </span></span>
+<span><span class="co">#&gt;  [5] "#' @description full_description_from_spreadsheet"                                  </span></span>
+<span><span class="co">#&gt;  [6] "#'"                                                                                 </span></span>
+<span><span class="co">#&gt;  [7] "#' @param x a numeric indicating position on x axis"                                </span></span>
+<span><span class="co">#&gt;  [8] "#' @param y a numeric indicating position on y axis"                                </span></span>
+<span><span class="co">#&gt;  [9] "#' @param ..."                                                                      </span></span>
+<span><span class="co">#&gt; [10] "#'"                                                                                 </span></span>
+<span><span class="co">#&gt; [11] "#' @return a ggplot2 annotation layer which is the plotmath version of a function"  </span></span>
+<span><span class="co">#&gt; [12] "#' @export"                                                                         </span></span>
+<span><span class="co">#&gt; [13] "#'"                                                                                 </span></span>
+<span><span class="co">#&gt; [14] "#' @examples"                                                                       </span></span>
+<span><span class="co">#&gt; [15] "#' library(ggplot2)"                                                                </span></span>
+<span><span class="co">#&gt; [16] "#' ggplot() +"                                                                      </span></span>
+<span><span class="co">#&gt; [17] "#'    function_name_from_spreadsheet()"                                             </span></span>
+<span><span class="co">#&gt; [18] "function_name_from_spreadsheet &lt;- function(x = 0,  y = 0, ...){"                    </span></span>
+<span><span class="co">#&gt; [19] ""                                                                                   </span></span>
+<span><span class="co">#&gt; [20] "  plotmath_input &lt;- \"plotmath_input_from_spreadsheet\""                            </span></span>
+<span><span class="co">#&gt; [21] ""                                                                                   </span></span>
+<span><span class="co">#&gt; [22] "  ggplot2::annotate(geom = \"text\","                                               </span></span>
+<span><span class="co">#&gt; [23] "           label = plotmath_input,"                                                 </span></span>
+<span><span class="co">#&gt; [24] "           parse = T,"                                                              </span></span>
+<span><span class="co">#&gt; [25] "           x = x, y = y, ... )"                                                     </span></span>
+<span><span class="co">#&gt; [26] ""                                                                                   </span></span>
+<span><span class="co">#&gt; [27] "}"</span></span></code></pre></div>
 <p>To see exactly how we used the template to generate all the functions for this package, see the processing code <a href="https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd" class="external-link">here</a>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu">ggxmean</span><span class="fu">:::</span><span class="fu"><a href="https://rdrr.io/pkg/ggxmean/man/stamp_space.html" class="external-link">stamp_space</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">stamp_equation_normal</span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
@@ -244,8 +239,9 @@
 <h1 id="solution-package-with-key-equations">Solution: package with key equations<a class="anchor" aria-label="anchor" href="#solution-package-with-key-equations"></a>
 </h1>
 <p>The equations in the plot were produce in the following fashion (no functions or package pre-built):</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">equation_z_stat_md</span> <span class="op">&lt;-</span> <span class="st">"$z=\\frac{\\hat{p}-\\pi}{SD_{null}}$, where $SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}$"</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">equation_z_stat_md</span> <span class="op">&lt;-</span> <span class="st">"$z=\\frac{\\hat{p}-\\pi}{SD_{null}}$, where $SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}$"</span></span>
 <span></span>
 <span><span class="va">equation_z_stat_plot</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html" class="external-link">TeX</a></span><span class="op">(</span><span class="va">equation_z_stat_md</span><span class="op">)</span></span>
 <span></span>
@@ -261,14 +257,15 @@
 <span>           x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0</span>, </span>
 <span>           label <span class="op">=</span> <span class="va">equation_z_stat_plot</span>, </span>
 <span>           color <span class="op">=</span> <span class="st">"grey25"</span>, size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-8-1.png"><!-- --></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span><span class="st">"label"</span>, </span>
 <span>           x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0</span>, </span>
 <span>           label <span class="op">=</span> <span class="va">equation_conf_interval_z_plot</span>, </span>
 <span>           color <span class="op">=</span> <span class="st">"grey25"</span>, size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-8-2.png"><!-- --></p>
+<p><img src="reference/figures/README-unnamed-chunk-9-2.png" width="100%"></p>
 <div class="figure">
 <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Csqrt%7B3x-1%7D%2B%281%2Bx%29%5E2%20%22%5Csqrt%7B3x-1%7D+(1+x)%5E2%22" alt=""><p class="caption">\sqrt{3x-1}+(1+x)^2</p>
 </div>
@@ -361,7 +358,7 @@
 </li>
 <li>we’ll make the repository available in this account</li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<!-- end list --><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plotmath_ev</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html" class="external-link">TeX</a></span><span class="op">(</span><span class="st">"$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"</span><span class="op">)</span></span>
 <span><span class="va">plotmath_var</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html" class="external-link">TeX</a></span><span class="op">(</span><span class="st">"$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$"</span><span class="op">)</span></span>
 <span><span class="va">plotmath_sd</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html" class="external-link">TeX</a></span><span class="op">(</span><span class="st">"$\\sigma_x = SD(X) = \\sqrt{Var(X)}$"</span><span class="op">)</span></span>
@@ -382,9 +379,11 @@
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">stamp_one_plus_one</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">stamp_one_plus_one</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/more%20examples-1.png"><!-- --></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"totaled"</span>, <span class="st">"fender bender"</span>, <span class="st">"accident free"</span><span class="op">)</span>,</span>
+<p><img src="reference/figures/README-more%20examples-1.png" width="100%"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"totaled"</span>, <span class="st">"fender bender"</span>, <span class="st">"accident free"</span><span class="op">)</span>,</span>
 <span>       probability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.01</span>, <span class="fl">.09</span>, <span class="fl">.9</span><span class="op">)</span>,</span>
 <span>       payout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20000</span>, <span class="fl">5000</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span></span>
 <span>  <span class="va">expected</span></span>
@@ -408,9 +407,12 @@
 <span>           x <span class="op">=</span> <span class="fl">12000</span>, y <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>, label <span class="op">=</span> <span class="st">"sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) "</span>, parse <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>           x <span class="op">=</span> <span class="fl">12000</span>, y <span class="op">=</span> <span class="fl">.65</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/more%20examples-2.png"><!-- --></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">stamp_eq_ev</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">0</span>,  <span class="va">y</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<p><img src="reference/figures/README-more%20examples-2.png" width="100%"></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span></span>
+<span></span>
+<span><span class="va">stamp_eq_ev</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">0</span>,  <span class="va">y</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
 <span></span>
 <span>  <span class="co"># your work here</span></span>
 <span></span>
@@ -435,7 +437,7 @@
 <span>  <span class="fu"><a href="reference/stamp_eq_ev.html">stamp_eq_ev</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/stamp_eq_var.html">stamp_eq_var</a></span><span class="op">(</span>y <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/stamp_eq_sd.html">stamp_eq_sd</a></span><span class="op">(</span>y <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/more%20examples-3.png"><!-- --></p>
+<p><img src="reference/figures/README-more%20examples-3.png" width="100%"></p>
 </div>
 
   </main><aside class="col-md-3"><div class="license">
