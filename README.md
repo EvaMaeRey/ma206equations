@@ -3,6 +3,9 @@
 
 # ma206equations <img src="man/figures/logo.png" align="right" height="120" />
 
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+
 Delivering type-setting equations in prose and plots as functions for
 statistics and probability curricula
 
