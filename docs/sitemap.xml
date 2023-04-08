@@ -10,12 +10,6 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/README.html</loc>
-  </url>
-  <url>
-    <loc>/README.knit.html</loc>
-  </url>
-  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -23,9 +17,6 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stamp_eq_binomeal.html</loc>
   </url>
   <url>
     <loc>/reference/stamp_eq_binomial.html</loc>
@@ -38,9 +29,6 @@
   </url>
   <url>
     <loc>/reference/stamp_eq_ev.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stamp_eq_expected_value.html</loc>
   </url>
   <url>
     <loc>/reference/stamp_eq_geometric.html</loc>
@@ -64,16 +52,7 @@
     <loc>/reference/stamp_eq_se_z_test.html</loc>
   </url>
   <url>
-    <loc>/reference/stamp_eq_standard_deviation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stamp_eq_t_confidence_interval.html</loc>
-  </url>
-  <url>
     <loc>/reference/stamp_eq_var.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stamp_eq_variance.html</loc>
   </url>
   <url>
     <loc>/reference/stamp_sd_null_2_sample_t_test.html</loc>

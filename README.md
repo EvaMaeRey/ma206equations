@@ -278,11 +278,6 @@ library(tidyverse)
 ggplot2::ggplot() +
   stamp_one_plus_one() +
   stamp_one_plus_one(size = 12, y = 2)
-```
-
-<img src="man/figures/README-more examples-1.png" width="100%" />
-
-``` r
 
 
 tibble::tibble(event = c("totaled", "fender bender", "accident free"),
@@ -309,11 +304,6 @@ expected %>%
            x = 12000, y = .8) +
   annotate(geom = "text", label = "sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) ", parse = T,
            x = 12000, y = .65)
-```
-
-<img src="man/figures/README-more examples-2.png" width="100%" />
-
-``` r
 
 
 
@@ -343,5 +333,3 @@ ggplot() +
   stamp_eq_var(y = -1)+
   stamp_eq_sd(y = -2)
 ```
-
-<img src="man/figures/README-more examples-3.png" width="100%" />
