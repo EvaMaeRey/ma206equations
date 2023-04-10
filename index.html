@@ -78,41 +78,59 @@
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="20%"></p>
 <p>The typed version of this equation which follows is a distant cousin from its beautiful rendered kin above:</p>
 <p><code>p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }</code></p>
-<p>Furthermore, if we want to use annotate a plot with this equation, we would need to use plot math, a different typed syntax.</p>
+<p>Furthermore, if we want to use annotate a plot with this equation, we would need to use plotmath, a completely different type setting system.</p>
 <p><code>p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})}</code></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">math_plot_normal</span> <span class="op">&lt;-</span> <span class="st">"p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} "</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu">ggxmean</span><span class="fu">:::</span><span class="fu">stamp_space</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">annotate</span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"label"</span>, </span>
-<span>           label <span class="op">=</span> <span class="va">math_plot_normal</span>,</span>
+<span>  <span class="fu">ggxmean</span><span class="fu">::</span><span class="fu">stamp_normal_dist</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">annotate</span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>, </span>
+<span>           label <span class="op">=</span> <span class="st">"p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} "</span>,</span>
 <span>           parse <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>           x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">ggxmean</span><span class="fu">::</span><span class="fu">stamp_normal_dist</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">ggstamp</span><span class="fu">::</span><span class="fu">stamp_text_ljust</span><span class="op">(</span>label <span class="op">=</span> <span class="st">"What is the max of this function?"</span>,</span>
-<span>                      x <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, </span>
-<span>                      y <span class="op">=</span> <span class="fl">.44</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"><!-- Fortunately, a translater exists. --></p>
-<!-- ```{r} -->
-<!-- exp_to_plot <- latex2exp::TeX("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$") -->
-<!-- ``` -->
-<p>Consider Ian Stewart’s poster below, ‘Equations that changed the world.’ We see the equations themselves and a verbal way to refer to the equations - the equation’s name. The typesetting version, thankfully, does not appear.</p>
-<p>In a setting where you are using software, it might be preferable to refer to the equation by name rather than always typing of the typesetting version. For example <code>typeset_pathagoreans()</code> could return <code>$ a^2 + b^2 = c^2 $</code> which could be copy and pasted or used dynamically in a hybrid prose/code document like jupiter notebooks, rmarkdown, or quarto.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"man/figures/equations_that_changed_world.png"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/equations_that_changed_world.png" width="100%"></p>
+<span>           x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 </div>
 <div class="section level1">
 <h1 id="a-different-work-flow-within-intro-probability-and-statistics-course-work">A different work flow within intro probability and statistics course work…<a class="anchor" aria-label="anchor" href="#a-different-work-flow-within-intro-probability-and-statistics-course-work"></a>
 </h1>
-<p>What if we could call a function to get back the text that will render to our beautiful equations. For example a function like <code>return_equation_normal()</code> could be called to get the typed version of the prose and <code><a href="reference/stamp_eq_normal.html">stamp_eq_normal()</a></code> for use in ggplot2.</p>
+<p>What if we could call a function to get back the text that will render to our beautiful equations. For example a function like <code><a href="reference/typeset_eq_normal.html">typeset_eq_normal()</a></code> could be called to get the typed version of the prose and <code><a href="reference/stamp_eq_normal.html">stamp_eq_normal()</a></code> for use in ggplot2.</p>
+<p>Our package ma206equations delivers exactly this. ma206equations delivers tex version of equations that can be used in prose, as shown here:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ma206equations</span><span class="fu">::</span><span class="fu"><a href="reference/typeset_eq_ev.html">typeset_eq_ev</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"</span></span></code></pre></div>
+<p>Educators can call this equation and then copy and paste into hybrid prose-code documents, or use in-line code to return the equation dynamically:<br><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5Csum_1%5En%7Bx_ip_i%7D%20%22E%5BX%5D%20=%20x_1p_1%20+%20x_2p_2%20+%20x_3p_3%20...x_np_n%20=%20%5Csum_1%5En%7Bx_ip_i%7D%22" alt="E[X] = x_1p_1 + x_2p_2 + x_3p_3 …x_np_n = \sum_1^n{x_ip_i}"></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>This is an example of how to return an equation inline: </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>`r ma206equations::typeset_eq_ev(inline = TRUE)`</span></code></pre></div>
+<p>This is an example of how to return an equation inline: <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5Csum_1%5En%7Bx_ip_i%7D%20%22E%5BX%5D%20=%20x_1p_1%20+%20x_2p_2%20+%20x_3p_3%20...x_np_n%20=%20%5Csum_1%5En%7Bx_ip_i%7D%22" alt="E[X] = x_1p_1 + x_2p_2 + x_3p_3 …x_np_n = \sum_1^n{x_ip_i}"></p>
+<p>To use equations in a plotting context, ma206equations provides stamp_eq_*() functions. An example of how to print the normal distribution equation with ma206equations follows:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://evamaerey.github.io/ma206equations/">ma206equations</a></span><span class="op">)</span></span>
+<span><span class="fu">ggxmean</span><span class="fu">:::</span><span class="fu">stamp_space</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ma206equations</span><span class="fu">::</span><span class="fu"><a href="reference/stamp_eq_normal.html">stamp_eq_normal</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggxmean</span><span class="fu">::</span><span class="fu">stamp_normal_dist</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="100%"></p>
 </div>
 <div class="section level1">
-<h1 id="data-collection">‘data’ collection<a class="anchor" aria-label="anchor" href="#data-collection"></a>
+<h1 id="metaprogramming-code-that-writes-code">metaprogramming: code that writes code<a class="anchor" aria-label="anchor" href="#metaprogramming-code-that-writes-code"></a>
 </h1>
+<p>At first we worked on writing functions one by one. However, doing so for the large number of equations that we thought might be useful did not seems sustainable. Therefore we turned to a meta-programming:</p>
+<blockquote>
+<p>Meta-Programming is a programming technique in which computer programs have the ability to treat programs as their data.It means that a program can be designed to read, generate, analyse or transform other programs, and even modify itself while running. Meta Programming is about writing code that writes code. (Anshul Vyas)</p>
+</blockquote>
+<p>The meta programming files are included in data-raw folder of this package. The components are</p>
+<ol style="list-style-type: decimal">
+<li>spreadsheet of equations of interest for ma206, descriptions etc.</li>
+<li>function composition and testing files</li>
+<li>function template files</li>
+<li>r package function generation code from templates and spreadsheet</li>
+</ol>
+<div class="section level2">
+<h2 id="id_1-data-collection">1 ‘data’ collection<a class="anchor" aria-label="anchor" href="#id_1-data-collection"></a>
+</h2>
 <p>A large part of this project was thinking about which equations are relevant for a course like ma206.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"data-raw/ma389_stats_formulas.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">long_description</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -202,9 +220,17 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># for preparation of stamp functions</span></span>
+</div>
+<div class="section level2">
+<h2 id="id_2-work-on-specific-functions-that-serve-as-a-reference-for-how-remainder-should-look">2. Work on specific functions that serve as a reference for how remainder should look.<a class="anchor" aria-label="anchor" href="#id_2-work-on-specific-functions-that-serve-as-a-reference-for-how-remainder-should-look"></a>
+</h2>
+<p>Here we just considered specific functions: <a href="https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/plotmath_functions_playpen.Rmd" class="external-link">here</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="id_3-write-templates-for-generating-a-lot-of-functions-and-their-documentation">3. Write templates for generating a lot of functions and their documentation<a class="anchor" aria-label="anchor" href="#id_3-write-templates-for-generating-a-lot-of-functions-and-their-documentation"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># for preparation of stamp functions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"data-raw/plotmath_equations_template.txt"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "# Note: do not edit .R file directly; file created from equations_temlapte.txt file"</span></span>
 <span><span class="co">#&gt;  [2] ""                                                                                   </span></span>
@@ -233,51 +259,33 @@
 <span><span class="co">#&gt; [25] "           x = x, y = y, ... )"                                                     </span></span>
 <span><span class="co">#&gt; [26] ""                                                                                   </span></span>
 <span><span class="co">#&gt; [27] "}"</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="id_4-use-template-and-spreadsheet-w-meta-code-to-create-package-functions">4. Use template and spreadsheet w/ meta code to create package functions<a class="anchor" aria-label="anchor" href="#id_4-use-template-and-spreadsheet-w-meta-code-to-create-package-functions"></a>
+</h2>
 <p>To see exactly how we used the template to generate all the functions for this package, see the processing code <a href="https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd" class="external-link">here</a>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="fu">ggxmean</span><span class="fu">:::</span><span class="fu">stamp_space</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">stamp_equation_normal</span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<hr>
+<!-- Fortunately, a translater exists. --><!-- ```{r} --><!-- exp_to_plot <- latex2exp::TeX("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$") --><!-- ``` -->
+</div>
 </div>
 <div class="section level1">
-<h1 id="solution-package-with-key-equations">Solution: package with key equations<a class="anchor" aria-label="anchor" href="#solution-package-with-key-equations"></a>
+<h1 id="more-fun-ideas-for-selling-the-project">More fun ideas for selling the project!<a class="anchor" aria-label="anchor" href="#more-fun-ideas-for-selling-the-project"></a>
 </h1>
-<p>The equations in the plot were produce in the following fashion (no functions or package pre-built):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">equation_z_stat_md</span> <span class="op">&lt;-</span> <span class="st">"$z=\\frac{\\hat{p}-\\pi}{SD_{null}}$, where $SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}$"</span></span>
-<span></span>
-<span><span class="va">equation_z_stat_plot</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu">TeX</span><span class="op">(</span><span class="va">equation_z_stat_md</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">equation_conf_interval_z_md</span> <span class="op">&lt;-</span> <span class="st">"$CI = \\hat{p}\\pm Multiplier*SE$, where $SE = \\sqrt{\\frac{\\hat{p}*(1-\\hat{p})}{n}}$"</span></span>
-<span></span>
-<span><span class="va">equation_conf_interval_z_plot</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu">TeX</span><span class="op">(</span><span class="va">equation_conf_interval_z_md</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"label"</span>, </span>
-<span>           x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0</span>, </span>
-<span>           label <span class="op">=</span> <span class="va">equation_z_stat_plot</span>, </span>
-<span>           color <span class="op">=</span> <span class="st">"grey25"</span>, size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
+<p>Consider Ian Stewart’s poster below, ‘Equations that changed the world.’ We see the equations themselves and a verbal way to refer to the equations - the equation’s name. The typesetting version, thankfully, does not appear.</p>
+<p>In a setting where you are using software, it might be preferable to refer to the equation by name rather than always typing of the typesetting version. For example <code>typeset_pathagoreans()</code> could return <code>$ a^2 + b^2 = c^2 $</code> which could be copy and pasted or used dynamically in a hybrid prose/code document like jupiter notebooks, rmarkdown, or quarto.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"label"</span>, </span>
-<span>           x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0</span>, </span>
-<span>           label <span class="op">=</span> <span class="va">equation_conf_interval_z_plot</span>, </span>
-<span>           color <span class="op">=</span> <span class="st">"grey25"</span>, size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-2.png" width="100%"></p>
-<div class="figure">
-<img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Csqrt%7B3x-1%7D%2B%281%2Bx%29%5E2%20%22%5Csqrt%7B3x-1%7D+(1+x)%5E2%22" alt=""><p class="caption">\sqrt{3x-1}+(1+x)^2</p>
-</div>
-<p><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;z%3D%5Cfrac%7B%5Chat%7Bp%7D-%5Cpi%7D%7BSD_%7Bnull%7D%7D%20%22z=%5Cfrac%7B%5Chat%7Bp%7D-%5Cpi%7D%7BSD_%7Bnull%7D%7D%22" alt="z=\frac{\hat{p}-\pi}{SD_{null}}">, where <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;SD_%7Bnull%7D%3D%5Csqrt%7B%5Cfrac%7B%5Cpi_%7B0%7D%2A%281-%5Cpi_%7B0%7D%29%7D%7Bn%7D%7D%20%22SD_%7Bnull%7D=%5Csqrt%7B%5Cfrac%7B%5Cpi_%7B0%7D*(1-%5Cpi_%7B0%7D)%7D%7Bn%7D%7D%22" alt="SD_{null}=\sqrt{\frac{\pi_{0}*(1-\pi_{0})}{n}}"></p>
-<div class="figure">
-<img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Calpha%20%22%5Calpha%22" alt=""><p class="caption">\alpha</p>
-</div>
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"man/figures/equations_that_changed_world.png"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/equations_that_changed_world.png" width="100%"></p>
 <hr>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"https://i.kym-cdn.com/photos/images/newsfeed/001/179/540/554.jpg"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="https://i.kym-cdn.com/photos/images/newsfeed/001/179/540/554.jpg" width="100%"></p>
+<p>‘After the math symbols were added, the image and gif surged in popularity, particularly on Brazilian parts of social media, before it grew popular worldwide.’ “<a href="https://knowyourmeme.com/memes/math-lady-confused-lady" class="external-link uri">https://knowyourmeme.com/memes/math-lady-confused-lady</a>”</p>
+<hr>
+</div>
+<div class="section level1">
+<h1 id="internal-project-management-notes">Internal project management notes<a class="anchor" aria-label="anchor" href="#internal-project-management-notes"></a>
+</h1>
 </div>
 <div class="section level1">
 <h1 id="project-refereences">Project refereences:<a class="anchor" aria-label="anchor" href="#project-refereences"></a>
@@ -362,7 +370,7 @@
 </li>
 <li>we’ll make the repository available in this account</li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<!-- end list --><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plotmath_ev</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu">TeX</span><span class="op">(</span><span class="st">"$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"</span><span class="op">)</span></span>
 <span><span class="va">plotmath_var</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu">TeX</span><span class="op">(</span><span class="st">"$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$"</span><span class="op">)</span></span>
 <span><span class="va">plotmath_sd</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu">TeX</span><span class="op">(</span><span class="st">"$\\sigma_x = SD(X) = \\sqrt{Var(X)}$"</span><span class="op">)</span></span>
