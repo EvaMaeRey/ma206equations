@@ -102,29 +102,105 @@ The typed version of this equation which follows is a distant cousin from its be
 
 `p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }`
 
-Furthermore, if we want to use annotate a plot with this equation, we would need to use plot math, a different typed syntax.
+Furthermore, if we want to use annotate a plot with this equation, we would need to use plotmath, a completely different type setting system.
 
 `p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} `
 
 ```{r, warning=F}
-math_plot_normal <- "p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} "
-
 library(ggplot2)
 ggxmean:::stamp_space() + 
-  annotate(geom = "label", 
-           label = math_plot_normal,
+  ggxmean::stamp_normal_dist() +
+  annotate(geom = "text", 
+           label = "p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} ",
            parse = T,
-           x = 2, y = .3) + 
-  ggxmean::stamp_normal_dist() + 
-  ggstamp::stamp_text_ljust(label = "What is the max of this function?",
-                      x = -4, 
-                      y = .44)
+           x = 2, y = .3)
 ```
+
+# A different work flow within intro probability and statistics course work...
+
+What if we could call a function to get back the text that will render to our beautiful equations. For example a function like `typeset_eq_normal()` could be called to get the typed version of the prose and `stamp_eq_normal()` for use in ggplot2.
+
+Our package ma206equations delivers exactly this. ma206equations delivers tex version of equations that can be used in prose, as shown here:
+
+```{r}
+ma206equations::typeset_eq_ev()
+```
+
+Educators can call this equation and then copy and paste into hybrid prose-code documents, or use in-line code to return the equation dynamically: 
+$$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \sum_1^n{x_ip_i}$$
+
+```{verbatim}
+This is an example of how to return an equation inline: 
+  
+`r ma206equations::typeset_eq_ev(inline = TRUE)`
+
+```
+
+
+This is an example of how to return an equation inline: `r ma206equations::typeset_eq_ev(inline = TRUE)`
+
+To use equations in a plotting context, ma206equations provides stamp_eq_*() functions.  An example of how to print the normal distribution equation with ma206equations follows:
+
+```{r}
+library(ggplot2)
+library(ma206equations)
+ggxmean:::stamp_space() + 
+  ma206equations::stamp_eq_normal(x = 2, y = .3) + 
+  ggxmean::stamp_normal_dist()
+```
+
+# metaprogramming: code that writes code
+
+At first we worked on writing functions one by one. However, doing so for the large number of equations that we thought might be useful did not seems sustainable.  Therefore we turned to a meta-programming:
+
+> Meta-Programming is a programming technique in which computer programs have the ability to treat programs as their data.It means that a program can be designed to read, generate, analyse or transform other programs, and even modify itself while running. Meta Programming is about writing code that writes code. (Anshul Vyas)
+
+The meta programming files are included in data-raw folder of this package.  The components are 
+
+1) spreadsheet of equations of interest for ma206, descriptions etc.
+2) function composition and testing files 
+3) function template files 
+3) r package function generation code from templates and spreadsheet
+
+## 1 'data' collection
+
+A large part of this project was thinking about which equations are relevant for a course like ma206. 
+
+```{r}
+read.csv("data-raw/ma389_stats_formulas.csv") |>
+  dplyr::select(-long_description) |>
+  tail(7) |> 
+  knitr::kable()
+```
+
+## 2. Work on specific functions that serve as a reference for how remainder should look.
+
+Here we just considered specific functions: [here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/plotmath_functions_playpen.Rmd).
+
+## 3. Write templates for generating a lot of functions and their documentation
+
+```{r}
+# for preparation of stamp functions
+readLines("data-raw/plotmath_equations_template.txt")
+```
+
+## 4. Use template and spreadsheet w/ meta code to create package functions
+
+To see exactly how we used the template to generate all the functions for this package, see the processing code [here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd).
+
+
+
+
+---
+
 <!-- Fortunately, a translater exists. -->
 
 <!-- ```{r} -->
 <!-- exp_to_plot <- latex2exp::TeX("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$") -->
 <!-- ``` -->
+
+
+# More fun ideas for selling the project!  
 
 Consider Ian Stewart's poster below, 'Equations that changed the world.'  We see the equations themselves and a verbal way to refer to the equations - the equation's name.  The typesetting version, thankfully, does not appear.  
 
@@ -134,76 +210,20 @@ In a setting where you are using software, it might be preferable to refer to th
 knitr::include_graphics("man/figures/equations_that_changed_world.png")
 ```
 
-
-# A different work flow within intro probability and statistics course work...
-
-What if we could call a function to get back the text that will render to our beautiful equations. For example a function like `return_equation_normal()` could be called to get the typed version of the prose and `stamp_eq_normal()` for use in ggplot2.
-
-# 'data' collection
-
-A large part of this project was thinking about which equations are relevant for a course like ma206. 
+---
 
 ```{r}
-read.csv("data-raw/ma389_stats_formulas.csv") |>
-  dplyr::select(-long_description) |>
-  tail(7) |> 
-  knitr::kable()
-
-# for preparation of stamp functions
-readLines("data-raw/plotmath_equations_template.txt")
-
+knitr::include_graphics("https://i.kym-cdn.com/photos/images/newsfeed/001/179/540/554.jpg")
 ```
 
-To see exactly how we used the template to generate all the functions for this package, see the processing code [here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd).
-
-```{r, eval = F}
-library(ggplot2)
-ggxmean:::stamp_space() + 
-  stamp_equation_normal() 
-```
+'After the math symbols were added, the image and gif surged in popularity, particularly on Brazilian parts of social media, before it grew popular worldwide.' "https://knowyourmeme.com/memes/math-lady-confused-lady"
 
 
 
-# Solution: package with key equations
-
-
-
-The equations in the plot were produce in the following fashion (no functions or package pre-built): 
-
-```{r, eval = T, warning=F, message=F}
-
-equation_z_stat_md <- "$z=\\frac{\\hat{p}-\\pi}{SD_{null}}$, where $SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}$"
-
-equation_z_stat_plot <- latex2exp::TeX(equation_z_stat_md)
-
-equation_conf_interval_z_md <- "$CI = \\hat{p}\\pm Multiplier*SE$, where $SE = \\sqrt{\\frac{\\hat{p}*(1-\\hat{p})}{n}}$"
-
-equation_conf_interval_z_plot <- latex2exp::TeX(equation_conf_interval_z_md)
-
-
-library(tidyverse)
-
-ggplot() +
-  annotate("label", 
-           x = 0, y = 0, 
-           label = equation_z_stat_plot, 
-           color = "grey25", size = 4)
-
-ggplot() +
-  annotate("label", 
-           x = 0, y = 0, 
-           label = equation_conf_interval_z_plot, 
-           color = "grey25", size = 4)
-
-```
-
-$\sqrt{3x-1}+(1+x)^2$
-
-`r equation_z_stat_md` 
-
-$$\alpha$$
 
 ---
+
+# Internal project management notes
 
 # Project refereences:
 

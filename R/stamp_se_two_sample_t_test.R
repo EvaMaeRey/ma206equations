@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_se_two_sample_t_test
 #'
 #' @description Standard Error in the  Two-Sample T-test context. 

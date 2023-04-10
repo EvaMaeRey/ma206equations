@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_statistic
 #'
 #' @description Unstandardized statistic in the  One- proportion z-test context. 

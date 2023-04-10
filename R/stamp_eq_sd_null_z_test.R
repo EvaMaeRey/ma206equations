@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_eq_sd_null_z_test
 #'
 #' @description Standard Deviation of the null distribution in the  One-proportion z-test context. In a two-proportion z-test, the null distribution is the distribution of the test statistic (z-score) under the assumption that the null hypothesis is true. The standard deviation of this null distribution depends on the sample sizes and the proportion values being compared.

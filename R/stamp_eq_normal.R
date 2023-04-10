@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_eq_normal
 #'
 #' @description Normal Distribution in the  Probability  context. Normal distribution: The normal distribution is one of the most commonly used probability distributions in statistics, and is often used to model continuous variables that are approximately normally distributed. In R, the normal distribution is implemented using the dnorm(), pnorm(), qnorm(), and rnorm() functions.

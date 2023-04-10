@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_eq_sd
 #'
 #' @description standard deviation in the  Description of the spread of the Data context. 

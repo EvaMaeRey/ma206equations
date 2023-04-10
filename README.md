@@ -46,61 +46,92 @@ from its beautiful rendered kin above:
 \sigma^2} }`
 
 Furthermore, if we want to use annotate a plot with this equation, we
-would need to use plot math, a different typed syntax.
+would need to use plotmath, a completely different type setting system.
 
 `p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) *
 phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})}`
 
 ``` r
-math_plot_normal <- "p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} "
-
 library(ggplot2)
 ggxmean:::stamp_space() + 
-  annotate(geom = "label", 
-           label = math_plot_normal,
+  ggxmean::stamp_normal_dist() +
+  annotate(geom = "text", 
+           label = "p(x) * {phantom() == phantom()} * frac(1, sqrt(2*pi*sigma^{2}, )) * phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})} ",
            parse = T,
-           x = 2, y = .3) + 
-  ggxmean::stamp_normal_dist() + 
-  ggstamp::stamp_text_ljust(label = "What is the max of this function?",
-                      x = -4, 
-                      y = .44)
+           x = 2, y = .3)
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
-<!-- Fortunately, a translater exists. -->
-
-<!-- ```{r} -->
-
-<!-- exp_to_plot <- latex2exp::TeX("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$") -->
-
-<!-- ``` -->
-
-Consider Ian Stewart’s poster below, ‘Equations that changed the world.’
-We see the equations themselves and a verbal way to refer to the
-equations - the equation’s name. The typesetting version, thankfully,
-does not appear.
-
-In a setting where you are using software, it might be preferable to
-refer to the equation by name rather than always typing of the
-typesetting version. For example `typeset_pathagoreans()` could return
-`$ a^2 + b^2 = c^2 $` which could be copy and pasted or used dynamically
-in a hybrid prose/code document like jupiter notebooks, rmarkdown, or
-quarto.
-
-``` r
-knitr::include_graphics("man/figures/equations_that_changed_world.png")
-```
-
-<img src="man/figures/equations_that_changed_world.png" width="100%" />
 
 # A different work flow within intro probability and statistics course work…
 
 What if we could call a function to get back the text that will render
 to our beautiful equations. For example a function like
-`return_equation_normal()` could be called to get the typed version of
-the prose and `stamp_eq_normal()` for use in ggplot2.
+`typeset_eq_normal()` could be called to get the typed version of the
+prose and `stamp_eq_normal()` for use in ggplot2.
 
-# ‘data’ collection
+Our package ma206equations delivers exactly this. ma206equations
+delivers tex version of equations that can be used in prose, as shown
+here:
+
+``` r
+ma206equations::typeset_eq_ev()
+#> [1] "$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"
+```
+
+Educators can call this equation and then copy and paste into hybrid
+prose-code documents, or use in-line code to return the equation
+dynamically:   
+![E\[X\] = x\_1p\_1 + x\_2p\_2 + x\_3p\_3 ...x\_np\_n =
+\\sum\_1^n{x\_ip\_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5Csum_1%5En%7Bx_ip_i%7D
+"E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}")  
+
+``` default
+This is an example of how to return an equation inline: 
+  
+`r ma206equations::typeset_eq_ev(inline = TRUE)`
+```
+
+This is an example of how to return an equation inline: ![E\[X\] =
+x\_1p\_1 + x\_2p\_2 + x\_3p\_3 ...x\_np\_n =
+\\sum\_1^n{x\_ip\_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5Csum_1%5En%7Bx_ip_i%7D
+"E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}")
+
+To use equations in a plotting context, ma206equations provides
+stamp\_eq\_\*() functions. An example of how to print the normal
+distribution equation with ma206equations follows:
+
+``` r
+library(ggplot2)
+library(ma206equations)
+ggxmean:::stamp_space() + 
+  ma206equations::stamp_eq_normal(x = 2, y = .3) + 
+  ggxmean::stamp_normal_dist()
+```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+
+# metaprogramming: code that writes code
+
+At first we worked on writing functions one by one. However, doing so
+for the large number of equations that we thought might be useful did
+not seems sustainable. Therefore we turned to a meta-programming:
+
+> Meta-Programming is a programming technique in which computer programs
+> have the ability to treat programs as their data.It means that a
+> program can be designed to read, generate, analyse or transform other
+> programs, and even modify itself while running. Meta Programming is
+> about writing code that writes code. (Anshul Vyas)
+
+The meta programming files are included in data-raw folder of this
+package. The components are
+
+1)  spreadsheet of equations of interest for ma206, descriptions etc.
+2)  function composition and testing files
+3)  function template files
+4)  r package function generation code from templates and spreadsheet
+
+## 1 ‘data’ collection
 
 A large part of this project was thinking about which equations are
 relevant for a course like ma206.
@@ -122,8 +153,14 @@ read.csv("data-raw/ma389_stats_formulas.csv") |>
 | 15 | 15 | ![(1-p)^(n-1)\*p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%281-p%29%5E%28n-1%29%2Ap "(1-p)^(n-1)*p")                                                                                                                                                                                                                                                                                                                                                                | Geometric Distribution | Probability                           | (1 - p)^{n - 1} \~ symbol(’\*’) \~ p                                                                                                                                                   | stamp\_eq\_geometric  |
 | 16 | 16 | ![n\!\\\\(r\!\*(n-r)\!)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%21%5C%5C%28r%21%2A%28n-r%29%21%29 "n!\\\\(r!*(n-r)!)")                                                                                                                                                                                                                                                                                                                                           | Choose Equation        | Probability                           | {}\[n\]*C\[r\] * {phantom() == phantom()} \* frac(n*‘\!’, r*’\!’(n - r)\*‘\!’)                                                                                                         | stamp\_eq\_choose     |
 
-``` r
+## 2\. Work on specific functions that serve as a reference for how remainder should look.
 
+Here we just considered specific functions:
+[here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/plotmath_functions_playpen.Rmd).
+
+## 3\. Write templates for generating a lot of functions and their documentation
+
+``` r
 # for preparation of stamp functions
 readLines("data-raw/plotmath_equations_template.txt")
 #>  [1] "# Note: do not edit .R file directly; file created from equations_temlapte.txt file"
@@ -155,67 +192,58 @@ readLines("data-raw/plotmath_equations_template.txt")
 #> [27] "}"
 ```
 
+## 4\. Use template and spreadsheet w/ meta code to create package functions
+
 To see exactly how we used the template to generate all the functions
 for this package, see the processing code
 [here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd).
 
-``` r
-library(ggplot2)
-ggxmean:::stamp_space() + 
-  stamp_equation_normal() 
-```
+-----
 
-# Solution: package with key equations
+<!-- Fortunately, a translater exists. -->
 
-The equations in the plot were produce in the following fashion (no
-functions or package pre-built):
+<!-- ```{r} -->
 
-``` r
+<!-- exp_to_plot <- latex2exp::TeX("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$") -->
 
-equation_z_stat_md <- "$z=\\frac{\\hat{p}-\\pi}{SD_{null}}$, where $SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}$"
+<!-- ``` -->
 
-equation_z_stat_plot <- latex2exp::TeX(equation_z_stat_md)
+# More fun ideas for selling the project\!
 
-equation_conf_interval_z_md <- "$CI = \\hat{p}\\pm Multiplier*SE$, where $SE = \\sqrt{\\frac{\\hat{p}*(1-\\hat{p})}{n}}$"
+Consider Ian Stewart’s poster below, ‘Equations that changed the world.’
+We see the equations themselves and a verbal way to refer to the
+equations - the equation’s name. The typesetting version, thankfully,
+does not appear.
 
-equation_conf_interval_z_plot <- latex2exp::TeX(equation_conf_interval_z_md)
-
-
-library(tidyverse)
-
-ggplot() +
-  annotate("label", 
-           x = 0, y = 0, 
-           label = equation_z_stat_plot, 
-           color = "grey25", size = 4)
-```
-
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+In a setting where you are using software, it might be preferable to
+refer to the equation by name rather than always typing of the
+typesetting version. For example `typeset_pathagoreans()` could return
+`$ a^2 + b^2 = c^2 $` which could be copy and pasted or used dynamically
+in a hybrid prose/code document like jupiter notebooks, rmarkdown, or
+quarto.
 
 ``` r
-
-ggplot() +
-  annotate("label", 
-           x = 0, y = 0, 
-           label = equation_conf_interval_z_plot, 
-           color = "grey25", size = 4)
+knitr::include_graphics("man/figures/equations_that_changed_world.png")
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-2.png" width="100%" />
-
-![\\sqrt{3x-1}+(1+x)^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Csqrt%7B3x-1%7D%2B%281%2Bx%29%5E2
-"\\sqrt{3x-1}+(1+x)^2")
-
-![z=\\frac{\\hat{p}-\\pi}{SD\_{null}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;z%3D%5Cfrac%7B%5Chat%7Bp%7D-%5Cpi%7D%7BSD_%7Bnull%7D%7D
-"z=\\frac{\\hat{p}-\\pi}{SD_{null}}"), where
-![SD\_{null}=\\sqrt{\\frac{\\pi\_{0}\*(1-\\pi\_{0})}{n}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;SD_%7Bnull%7D%3D%5Csqrt%7B%5Cfrac%7B%5Cpi_%7B0%7D%2A%281-%5Cpi_%7B0%7D%29%7D%7Bn%7D%7D
-"SD_{null}=\\sqrt{\\frac{\\pi_{0}*(1-\\pi_{0})}{n}}")
-
-  
-![\\alpha](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Calpha
-"\\alpha")  
+<img src="man/figures/equations_that_changed_world.png" width="100%" />
 
 -----
+
+``` r
+knitr::include_graphics("https://i.kym-cdn.com/photos/images/newsfeed/001/179/540/554.jpg")
+```
+
+<img src="https://i.kym-cdn.com/photos/images/newsfeed/001/179/540/554.jpg" width="100%" />
+
+‘After the math symbols were added, the image and gif surged in
+popularity, particularly on Brazilian parts of social media, before it
+grew popular worldwide.’
+“<https://knowyourmeme.com/memes/math-lady-confused-lady>”
+
+-----
+
+# Internal project management notes
 
 # Project refereences:
 

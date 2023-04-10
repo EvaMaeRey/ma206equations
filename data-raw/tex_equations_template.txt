@@ -1,0 +1,20 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
+#' function_name_from_spreadsheet
+
+#'
+
+#' @description The funtion_name equation for use in plain texts
+#'
+#'
+#' @return A character string containing a mathematical formula
+#' @export
+#'
+#' @examples
+#' function_name_from_spreadsheet()
+
+function_name_from_spreadsheet <- function (){
+
+  cat("formula_type_setting")
+
+}

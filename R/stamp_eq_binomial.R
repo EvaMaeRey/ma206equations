@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_eq_binomial
 #'
 #' @description Binomial Distribution in the  Probability  context. the binomial distribution provides a way to model the probability of observing a specific number of successes in a fixed number of trials, based on the underlying probability of success on each trial. This can be useful for making predictions, testing hypotheses, and assessing the reliability or efficiency of a process. 

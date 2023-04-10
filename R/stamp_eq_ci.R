@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_eq_ci
 #'
 #' @description Confidence Interval in the  One-proportion z-test context. The confidence interval is a useful tool in hypothesis testing, as it allows us to estimate the range of possible values for the true population proportion, and can help us decide whether a null hypothesis is plausible or should be rejected.

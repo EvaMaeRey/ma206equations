@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_eq_ev
 #'
 #' @description Expected Value in the  Probability Distributions context. The expected value of a probability distribution is a measure of the central tendency of the distribution, and represents the average or mean value that we would expect to observe if we were to repeat the random experiment many times. The expected value is a useful statistic because it provides a single number that summarizes the distribution of values that can be observed. It can be used to make predictions about future outcomes, as well as to assess the performance of statistical models or experimental designs.

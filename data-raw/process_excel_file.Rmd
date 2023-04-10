@@ -17,22 +17,38 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 readLines("plotmath_equations_template.txt") %>% 
-  paste(collapse = "\\n") -> functions_and_documentation_template
+  paste(collapse = "\\n") -> 
+stamps_functions_and_documentation_template
+
+readLines("tex_equations_template.txt") %>% 
+  paste(collapse = "\\n") -> 
+tex_functions_and_documentation_template
 
 library(tidyverse)
 read.csv("ma389_stats_formulas.csv")[2:7] %>% 
   janitor::clean_names() %>%
-  mutate(r_file_content_stamps = functions_and_documentation_template %>% 
+  mutate(typeset_function_name = stamp_function_name %>% str_replace("stamp","typeset")) %>% 
+  mutate(r_file_content_stamps = stamps_functions_and_documentation_template %>% 
            str_replace_all("function_name_from_spreadsheet", stamp_function_name) %>% 
            str_replace_all("full_description_from_spreadsheet", paste(description, "in the ", 
                                                                   context, "context.", long_description)) %>% 
-           str_replace_all("plotmath_input_from_spreadsheet", plotmath))   ->
+           str_replace_all("plotmath_input_from_spreadsheet", plotmath)) %>% 
+  mutate(r_file_content_typesetting = tex_functions_and_documentation_template %>% 
+           str_replace_all("function_name_from_spreadsheet", typeset_function_name) %>% 
+           str_replace_all("full_description_from_spreadsheet", paste(description, "in the ", 
+                                                                  context, "context.", long_description)) %>% 
+           str_replace_all("formula_type_setting", mathjax))   ->
 df_with_documentation
 
 for (i in 1:nrow(df_with_documentation)){
   
   writeLines(df_with_documentation$r_file_content_stamps[i] %>% stringr::str_split_1("\\\\n"), 
              paste0("../R/", df_with_documentation$stamp_function_name[i], ".R") 
+             )
+  
+   writeLines(df_with_documentation$r_file_content_typesetting[i] %>%  stringr::str_split_1("\\\\n") %>% 
+                str_replace_all("\\\\", "\\\\\\\\"), 
+             paste0("../R/", df_with_documentation$typeset_function_name[i], ".R") 
              )
   
 }

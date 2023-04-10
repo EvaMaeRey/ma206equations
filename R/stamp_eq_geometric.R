@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_eq_geometric
 #'
 #' @description Geometric Distribution in the  Probability  context. In each of these situations, the geometric distribution provides a way to model the probability of observing a specific number of trials until the first success occurs, based on the underlying probability of success on each trial. This can be useful for making predictions, designing experiments or systems, and assessing the reliability or efficiency of a process.

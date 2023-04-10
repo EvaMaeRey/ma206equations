@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_sd_null_2_sample_t_test
 #'
 #' @description Standard Deviation of the null distribution in the  Two-Proportion z-test context. 

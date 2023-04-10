@@ -1,3 +1,5 @@
+# Note: do not edit .R file directly; file created from equations_temlapte.txt file
+
 #' stamp_eq_se_z_test
 #'
 #' @description Standard error in the  One-proportion z-test context. The standard error (SE) of a one proportion z-test is a measure of the variability of the sample proportion estimate around the true population proportion. It tells us how much we expect the sample proportion to vary if we were to repeat the sampling process many times.
