@@ -96,13 +96,13 @@
 <p>What if we could call a function to get back the text that will render to our beautiful equations. For example a function like <code><a href="reference/typeset_eq_normal.html">typeset_eq_normal()</a></code> could be called to get the typed version of the prose and <code><a href="reference/stamp_eq_normal.html">stamp_eq_normal()</a></code> for use in ggplot2.</p>
 <p>Our package ma206equations delivers exactly this. ma206equations delivers tex version of equations that can be used in prose, as shown here:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ma206equations</span><span class="fu">::</span><span class="fu"><a href="reference/typeset_eq_ev.html">typeset_eq_ev</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"</span></span></code></pre></div>
-<p>Educators can call this equation and then copy and paste into hybrid prose-code documents, or use in-line code to return the equation dynamically:<br><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5Csum_1%5En%7Bx_ip_i%7D%20%22E%5BX%5D%20=%20x_1p_1%20+%20x_2p_2%20+%20x_3p_3%20...x_np_n%20=%20%5Csum_1%5En%7Bx_ip_i%7D%22" alt="E[X] = x_1p_1 + x_2p_2 + x_3p_3 …x_np_n = \sum_1^n{x_ip_i}"></p>
+<code class="sourceCode R"><span><span class="fu">ma206equations</span><span class="fu">::</span><span class="fu"><a href="reference/typeset_eq_normal.html">typeset_eq_normal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }$</span></span></code></pre></div>
+<p>Educators can call this equation and then copy and paste into hybrid prose-code documents, or use in-line code to return the equation dynamically:<br><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;p%28x%29%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7B%202%20%5Cpi%20%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5Cfrac%7B%20%28x%20-%20%5Cmu%29%5E2%20%7D%20%7B2%20%5Csigma%5E2%7D%20%7D%20%22p(x)%20=%20%5Cfrac%7B1%7D%7B%5Csqrt%7B%202%20%5Cpi%20%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5Cfrac%7B%20(x%20-%20%5Cmu)%5E2%20%7D%20%7B2%20%5Csigma%5E2%7D%20%7D%22" alt="p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }"></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>This is an example of how to return an equation inline: </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>`r ma206equations::typeset_eq_ev(inline = TRUE)`</span></code></pre></div>
-<p>This is an example of how to return an equation inline: <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5Csum_1%5En%7Bx_ip_i%7D%20%22E%5BX%5D%20=%20x_1p_1%20+%20x_2p_2%20+%20x_3p_3%20...x_np_n%20=%20%5Csum_1%5En%7Bx_ip_i%7D%22" alt="E[X] = x_1p_1 + x_2p_2 + x_3p_3 …x_np_n = \sum_1^n{x_ip_i}"></p>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>`r ma206equations::typeset_eq_normal(inline = TRUE)`</span></code></pre></div>
+<p>This is an example of how to return an equation inline: <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;p%28x%29%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7B%202%20%5Cpi%20%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5Cfrac%7B%20%28x%20-%20%5Cmu%29%5E2%20%7D%20%7B2%20%5Csigma%5E2%7D%20%7D%20%22p(x)%20=%20%5Cfrac%7B1%7D%7B%5Csqrt%7B%202%20%5Cpi%20%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5Cfrac%7B%20(x%20-%20%5Cmu)%5E2%20%7D%20%7B2%20%5Csigma%5E2%7D%20%7D%22" alt="p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }"></p>
 <p>To use equations in a plotting context, ma206equations provides stamp_eq_*() functions. An example of how to print the normal distribution equation with ma206equations follows:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -113,7 +113,7 @@
 <p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="100%"></p>
 </div>
 <div class="section level1">
-<h1 id="metaprogramming-code-that-writes-code">metaprogramming: code that writes code<a class="anchor" aria-label="anchor" href="#metaprogramming-code-that-writes-code"></a>
+<h1 id="metaprogramming-maintanance-strategy-code-that-writes-code">metaprogramming maintanance strategy: code that writes code<a class="anchor" aria-label="anchor" href="#metaprogramming-maintanance-strategy-code-that-writes-code"></a>
 </h1>
 <p>At first we worked on writing functions one by one. However, doing so for the large number of equations that we thought might be useful did not seems sustainable. Therefore we turned to a meta-programming:</p>
 <blockquote>
@@ -185,7 +185,7 @@
 <tr class="even">
 <td align="left">13</td>
 <td align="right">13</td>
-<td align="left"><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%23p%28x%29%20%3D%20%5C%5Cfrac%7B1%7D%7B%5C%5Csqrt%7B%202%20%5C%5Cpi%20%5C%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5C%5Cfrac%7B%20%28x%20-%20%5C%5Cmu%29%5E2%20%7D%20%7B2%20%5C%5Csigma%5E2%7D%20%7D" title="#p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }" alt="#p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }"></td>
+<td align="left"><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;p%28x%29%20%3D%20%5C%5Cfrac%7B1%7D%7B%5C%5Csqrt%7B%202%20%5C%5Cpi%20%5C%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5C%5Cfrac%7B%20%28x%20-%20%5C%5Cmu%29%5E2%20%7D%20%7B2%20%5C%5Csigma%5E2%7D%20%7D" title="p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }" alt="p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }"></td>
 <td align="left">Normal Distribution</td>
 <td align="left">Probability</td>
 <td align="left">p(x) * {phantom() == phantom()} * frac(1, sqrt(2<em>pi</em>sigma^{2}, )) * phantom(.)<em>e^{phantom() - frac((x - mu)^{2}, 2</em>sigma^{2})}</td>
@@ -264,6 +264,25 @@
 <h2 id="id_4-use-template-and-spreadsheet-w-meta-code-to-create-package-functions">4. Use template and spreadsheet w/ meta code to create package functions<a class="anchor" aria-label="anchor" href="#id_4-use-template-and-spreadsheet-w-meta-code-to-create-package-functions"></a>
 </h2>
 <p>To see exactly how we used the template to generate all the functions for this package, see the processing code <a href="https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd" class="external-link">here</a>.</p>
+<p>The function files are the following:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="st">"R/"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "stamp_eq_binomial.R"                 "stamp_eq_choose.R"                  </span></span>
+<span><span class="co">#&gt;  [3] "stamp_eq_ci.R"                       "stamp_eq_ev.R"                      </span></span>
+<span><span class="co">#&gt;  [5] "stamp_eq_geometric.R"                "stamp_eq_normal.R"                  </span></span>
+<span><span class="co">#&gt;  [7] "stamp_eq_sd_null_t_test.R"           "stamp_eq_sd_null_z_test.R"          </span></span>
+<span><span class="co">#&gt;  [9] "stamp_eq_sd.R"                       "stamp_eq_se_t_test.R"               </span></span>
+<span><span class="co">#&gt; [11] "stamp_eq_se_z_test.R"                "stamp_eq_var.R"                     </span></span>
+<span><span class="co">#&gt; [13] "stamp_sd_null_2_sample_t_test.R"     "stamp_sd_null_two_sample_t_test.R"  </span></span>
+<span><span class="co">#&gt; [15] "stamp_se_two_sample_t_test.R"        "stamp_statistic.R"                  </span></span>
+<span><span class="co">#&gt; [17] "typeset_eq_binomial.R"               "typeset_eq_choose.R"                </span></span>
+<span><span class="co">#&gt; [19] "typeset_eq_ci.R"                     "typeset_eq_ev.R"                    </span></span>
+<span><span class="co">#&gt; [21] "typeset_eq_geometric.R"              "typeset_eq_normal.R"                </span></span>
+<span><span class="co">#&gt; [23] "typeset_eq_sd_null_t_test.R"         "typeset_eq_sd_null_z_test.R"        </span></span>
+<span><span class="co">#&gt; [25] "typeset_eq_sd.R"                     "typeset_eq_se_t_test.R"             </span></span>
+<span><span class="co">#&gt; [27] "typeset_eq_se_z_test.R"              "typeset_eq_var.R"                   </span></span>
+<span><span class="co">#&gt; [29] "typeset_sd_null_2_sample_t_test.R"   "typeset_sd_null_two_sample_t_test.R"</span></span>
+<span><span class="co">#&gt; [31] "typeset_se_two_sample_t_test.R"      "typeset_statistic.R"</span></span></code></pre></div>
 <hr>
 <!-- Fortunately, a translater exists. --><!-- ```{r} --><!-- exp_to_plot <- latex2exp::TeX("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$") --><!-- ``` -->
 </div>
@@ -273,14 +292,24 @@
 </h1>
 <p>Consider Ian Stewart’s poster below, ‘Equations that changed the world.’ We see the equations themselves and a verbal way to refer to the equations - the equation’s name. The typesetting version, thankfully, does not appear.</p>
 <p>In a setting where you are using software, it might be preferable to refer to the equation by name rather than always typing of the typesetting version. For example <code>typeset_pathagoreans()</code> could return <code>$ a^2 + b^2 = c^2 $</code> which could be copy and pasted or used dynamically in a hybrid prose/code document like jupiter notebooks, rmarkdown, or quarto.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"man/figures/equations_that_changed_world.png"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/equations_that_changed_world.png" width="100%"></p>
 <hr>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"https://i.kym-cdn.com/photos/images/newsfeed/001/179/540/554.jpg"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="https://i.kym-cdn.com/photos/images/newsfeed/001/179/540/554.jpg" width="100%"></p>
 <p>‘After the math symbols were added, the image and gif surged in popularity, particularly on Brazilian parts of social media, before it grew popular worldwide.’ “<a href="https://knowyourmeme.com/memes/math-lady-confused-lady" class="external-link uri">https://knowyourmeme.com/memes/math-lady-confused-lady</a>”</p>
+<p>Chat GPT prompt: Why is the ‘when a woman says she’s 29 weeks pregnant’ meme funny?</p>
+<blockquote>
+<p>The “when a woman says she’s 29 weeks pregnant” meme is a humorous observation on the specificity with which women tend to describe their pregnancy progress. The joke is that a woman who says she is 29 weeks pregnant is providing a level of detail that is more than necessary for most people, and can be seen as somewhat comical.</p>
+</blockquote>
+<blockquote>
+<p>The meme often features a photo or image of a person with a confused or bewildered expression, with text overlayed that reads something along the lines of “me trying to figure out how many months that is.” The humor comes from the idea that it can be difficult for people who are not pregnant or familiar with pregnancy terminology to understand what is meant by phrases like “29 weeks.”</p>
+</blockquote>
+<blockquote>
+<p>In short, the meme is funny because it pokes fun at the precision with which pregnant women tend to describe their pregnancy progress, and the confusion that can result when that level of detail is shared with others who are not as familiar with the terminology.</p>
+</blockquote>
 <hr>
 </div>
 <div class="section level1">
@@ -370,81 +399,6 @@
 </li>
 <li>we’ll make the repository available in this account</li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">plotmath_ev</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu">TeX</span><span class="op">(</span><span class="st">"$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"</span><span class="op">)</span></span>
-<span><span class="va">plotmath_var</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu">TeX</span><span class="op">(</span><span class="st">"$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$"</span><span class="op">)</span></span>
-<span><span class="va">plotmath_sd</span> <span class="op">&lt;-</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu">TeX</span><span class="op">(</span><span class="st">"$\\sigma_x = SD(X) = \\sqrt{Var(X)}$"</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="co">### stamp equation example</span></span>
-<span><span class="va">stamp_one_plus_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">y</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">...</span><span class="op">)</span><span class="op">{</span></span>
-<span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>,</span>
-<span>           label <span class="op">=</span> <span class="st">"1 + 1"</span>,</span>
-<span>           parse <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>           x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">stamp_one_plus_one</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">stamp_one_plus_one</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"totaled"</span>, <span class="st">"fender bender"</span>, <span class="st">"accident free"</span><span class="op">)</span>,</span>
-<span>       probability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.01</span>, <span class="fl">.09</span>, <span class="fl">.9</span><span class="op">)</span>,</span>
-<span>       payout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20000</span>, <span class="fl">5000</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span></span>
-<span>  <span class="va">expected</span></span>
-<span></span>
-<span></span>
-<span><span class="va">expected</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">payout</span>, y <span class="op">=</span> <span class="va">probability</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>xend <span class="op">=</span> <span class="va">payout</span>, yend <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_text</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">probability</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>            vjust <span class="op">=</span> <span class="op">-</span><span class="fl">.5</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.01</span><span class="op">*</span><span class="fl">20000</span>, <span class="fl">.09</span><span class="op">*</span><span class="fl">5000</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">labs</span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Course idea 8:  The expected value E.V. is the 'balancing point' of a Random variable, X.  It is the weighted average of values, (weighting values by their probabilities). In large samples from the X, the average will be close to the E.V.;"</span> <span class="op">%&gt;%</span> <span class="fu">str_wrap</span><span class="op">(</span><span class="fl">60</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"label"</span>, x <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.01</span><span class="op">*</span><span class="fl">20000</span>, <span class="fl">.09</span><span class="op">*</span><span class="fl">5000</span><span class="op">)</span><span class="op">)</span>, label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.01</span><span class="op">*</span><span class="fl">20000</span>, <span class="fl">.09</span><span class="op">*</span><span class="fl">5000</span><span class="op">)</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">.5</span> <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>, label <span class="op">=</span> <span class="st">"E * '[' *X * ']' * {phantom() == phantom()} * x[1]*p[1] + x[2]*p[2] + x[3]*p[3]*...x[n]*p[n] * {phantom() == phantom()} * sum(x[i]*p[i], 1, n) "</span>, parse <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>           x <span class="op">=</span> <span class="fl">12000</span>, y <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>, label <span class="op">=</span> <span class="st">"Var(X) * {phantom() == phantom()} * E * '[' *(X - mu)^{2} * ']' * {phantom() == phantom()} * sigma[x]^{2} * {phantom() == phantom()} * sum(, 1, n)*(x[i] - mu)^{2}*p[i] "</span>, parse <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>           x <span class="op">=</span> <span class="fl">12000</span>, y <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">annotate</span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>, label <span class="op">=</span> <span class="st">"sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) "</span>, parse <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>           x <span class="op">=</span> <span class="fl">12000</span>, y <span class="op">=</span> <span class="fl">.65</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="va">stamp_eq_ev</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">0</span>,  <span class="va">y</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
-<span></span>
-<span>  <span class="co"># your work here</span></span>
-<span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span></span>
-<span><span class="va">stamp_eq_var</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">0</span>,  <span class="va">y</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
-<span></span>
-<span>  <span class="co"># your work here</span></span>
-<span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">stamp_eq_sd</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fl">0</span>,  <span class="va">y</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
-<span></span>
-<span>  <span class="co"># your work here</span></span>
-<span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/stamp_eq_ev.html">stamp_eq_ev</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/stamp_eq_var.html">stamp_eq_var</a></span><span class="op">(</span>y <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/stamp_eq_sd.html">stamp_eq_sd</a></span><span class="op">(</span>y <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 </div>
 
   </main><aside class="col-md-3"><div class="license">
