@@ -113,6 +113,12 @@ ggxmean:::stamp_space() +
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
+# Further examples, binomial distribution, geometric distribution, discrete random…
+
+For further examples that complement the work in ma206distributions,
+please check out that package
+[here](https://evamaerey.github.io/ma206distributions/).
+
 # metaprogramming maintanance strategy: code that writes code
 
 At first we worked on writing functions one by one. However, doing so
@@ -232,7 +238,7 @@ list.files("R/")
 
 <!-- ``` -->
 
-# More fun ideas for selling the project\!
+# Ideas for selling the project\!
 
 Consider Ian Stewart’s poster below, ‘Equations that changed the world.’
 We see the equations themselves and a verbal way to refer to the
