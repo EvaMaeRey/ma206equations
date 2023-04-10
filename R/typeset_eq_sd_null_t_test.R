@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_sd_null_t_test
+#' typeset_eq_sd_null_t_test()
 
-typeset_eq_sd_null_t_test <- function (){
+typeset_eq_sd_null_t_test <- function (inline = FALSE){
 
-  cat("$sd_{null}=s/\\sqrt{n}$")
+if(inline){
+"$sd_{null}=s/\\sqrt{n}$"
+}else{
+cat("$sd_{null}=s/\\sqrt{n}$")
+}
+
 
 }

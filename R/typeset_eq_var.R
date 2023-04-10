@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_var
+#' typeset_eq_var()
 
-typeset_eq_var <- function (){
+typeset_eq_var <- function (inline = FALSE){
 
-  cat("$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$")
+if(inline){
+"$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$"
+}else{
+cat("$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$")
+}
+
 
 }

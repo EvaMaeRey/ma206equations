@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_geometric
+#' typeset_eq_geometric()
 
-typeset_eq_geometric <- function (){
+typeset_eq_geometric <- function (inline = FALSE){
 
-  cat("$(1-p)^(n-1)*p$")
+if(inline){
+"$(1-p)^(n-1)*p$"
+}else{
+cat("$(1-p)^(n-1)*p$")
+}
+
 
 }

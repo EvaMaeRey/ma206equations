@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_choose
+#' typeset_eq_choose()
 
-typeset_eq_choose <- function (){
+typeset_eq_choose <- function (inline = FALSE){
 
-  cat("$n!\\(r!*(n-r)!)$")
+if(inline){
+"$n!\\(r!*(n-r)!)$"
+}else{
+cat("$n!\\(r!*(n-r)!)$")
+}
+
 
 }

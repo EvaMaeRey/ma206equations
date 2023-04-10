@@ -11,11 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_normal
+#' typeset_eq_normal()
 
-typeset_eq_normal <- function (){
+typeset_eq_normal <- function (inline = FALSE){
 
-  cat("$#p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$
-")
+if(inline){
+"$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$"
+}else{
+cat("$p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }$")
+}
+
 
 }

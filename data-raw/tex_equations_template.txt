@@ -13,8 +13,13 @@
 #' @examples
 #' function_name_from_spreadsheet()
 
-function_name_from_spreadsheet <- function (){
+function_name_from_spreadsheet <- function (inline = FALSE){
 
-  cat("formula_type_setting")
+if(inline){
+"formula_type_setting"
+}else{
+cat("formula_type_setting")
+}
+
 
 }

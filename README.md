@@ -75,27 +75,29 @@ delivers tex version of equations that can be used in prose, as shown
 here:
 
 ``` r
-ma206equations::typeset_eq_ev()
-#> [1] "$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"
+ma206equations::typeset_eq_normal()
+#> $p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }$
 ```
 
 Educators can call this equation and then copy and paste into hybrid
 prose-code documents, or use in-line code to return the equation
 dynamically:   
-![E\[X\] = x\_1p\_1 + x\_2p\_2 + x\_3p\_3 ...x\_np\_n =
-\\sum\_1^n{x\_ip\_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5Csum_1%5En%7Bx_ip_i%7D
-"E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}")  
+![p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x -
+\\mu)^2 } {2 \\sigma^2}
+}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%28x%29%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7B%202%20%5Cpi%20%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5Cfrac%7B%20%28x%20-%20%5Cmu%29%5E2%20%7D%20%7B2%20%5Csigma%5E2%7D%20%7D
+"p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }")  
 
 ``` default
 This is an example of how to return an equation inline: 
   
-`r ma206equations::typeset_eq_ev(inline = TRUE)`
+`r ma206equations::typeset_eq_normal(inline = TRUE)`
 ```
 
-This is an example of how to return an equation inline: ![E\[X\] =
-x\_1p\_1 + x\_2p\_2 + x\_3p\_3 ...x\_np\_n =
-\\sum\_1^n{x\_ip\_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5Csum_1%5En%7Bx_ip_i%7D
-"E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}")
+This is an example of how to return an equation inline: ![p(x) =
+\\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2
+\\sigma^2}
+}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%28x%29%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7B%202%20%5Cpi%20%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5Cfrac%7B%20%28x%20-%20%5Cmu%29%5E2%20%7D%20%7B2%20%5Csigma%5E2%7D%20%7D
+"p(x) = \\frac{1}{\\sqrt{ 2 \\pi \\sigma^2 }} e^{ - \\frac{ (x - \\mu)^2 } {2 \\sigma^2} }")
 
 To use equations in a plotting context, ma206equations provides
 stamp\_eq\_\*() functions. An example of how to print the normal
@@ -111,7 +113,7 @@ ggxmean:::stamp_space() +
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
-# metaprogramming: code that writes code
+# metaprogramming maintanance strategy: code that writes code
 
 At first we worked on writing functions one by one. However, doing so
 for the large number of equations that we thought might be useful did
@@ -143,15 +145,15 @@ read.csv("data-raw/ma389_stats_formulas.csv") |>
   knitr::kable()
 ```
 
-|    |  X | mathjax                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | description            | context                               | plotmath                                                                                                                                                                               | stamp\_function\_name |
-| :- | -: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------- | :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------- |
-| 10 | 10 | ![E\[X\] = x\_1p\_1 + x\_2p\_2 + x\_3p\_3 ...x\_np\_n = \\\\sum\_1^n{x\_ip\_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5C%5Csum_1%5En%7Bx_ip_i%7D "E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\\\sum_1^n{x_ip_i}")                                                                                                                                                                    | Expected Value         | Probability Distributions             | E \* ‘\[’ *X * ’\]’ \* {phantom() == phantom()} \* x\[1\]*p\[1\] + x\[2\]*p\[2\] + x\[3\]*p\[3\]*…x\[n\]*p\[n\] * {phantom() == phantom()} \* sum(x\[i\]\*p\[i\], 1, n)                | stamp\_eq\_ev         |
-| 11 | 11 | ![Var(X) = E\[(X-\\\\mu)^2\] = \\\\sigma^2\_x = \\\\sum\_1^n(x\_i-\\\\mu)^2p\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Var%28X%29%20%3D%20E%5B%28X-%5C%5Cmu%29%5E2%5D%20%3D%20%5C%5Csigma%5E2_x%20%3D%20%5C%5Csum_1%5En%28x_i-%5C%5Cmu%29%5E2p_i "Var(X) = E[(X-\\\\mu)^2] = \\\\sigma^2_x = \\\\sum_1^n(x_i-\\\\mu)^2p_i")                                                                                                                                       | Variance               | Description of the spread of the Data | Var(X) \* {phantom() == phantom()} \* E \* ‘\[’ *(X - mu)^{2} * ’\]’ \* {phantom() == phantom()} \* sigma\[x\]^{2} \* {phantom() == phantom()} \* sum(, 1, n)*(x\[i\] - mu)^{2}*p\[i\] | stamp\_eq\_var        |
-| 12 | 12 | ![\\\\sigma\_x = SD(X) = \\\\sqrt{Var(X)}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%5Csigma_x%20%3D%20SD%28X%29%20%3D%20%5C%5Csqrt%7BVar%28X%29%7D "\\\\sigma_x = SD(X) = \\\\sqrt{Var(X)}")                                                                                                                                                                                                                                                                     | standard deviation     | Description of the spread of the Data | sigma\[x\] \* {phantom() == phantom()} \* SD(X) \* {phantom() == phantom()} \* sqrt(Var(X), )                                                                                          | stamp\_eq\_sd         |
-| 13 | 13 | ![\#p(x) = \\\\frac{1}{\\\\sqrt{ 2 \\\\pi \\\\sigma^2 }} e^{ - \\\\frac{ (x - \\\\mu)^2 } {2 \\\\sigma^2} }](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%23p%28x%29%20%3D%20%5C%5Cfrac%7B1%7D%7B%5C%5Csqrt%7B%202%20%5C%5Cpi%20%5C%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5C%5Cfrac%7B%20%28x%20-%20%5C%5Cmu%29%5E2%20%7D%20%7B2%20%5C%5Csigma%5E2%7D%20%7D "#p(x) = \\\\frac{1}{\\\\sqrt{ 2 \\\\pi \\\\sigma^2 }} e^{ - \\\\frac{ (x - \\\\mu)^2 } {2 \\\\sigma^2} }") | Normal Distribution    | Probability                           | p(x) \* {phantom() == phantom()} \* frac(1, sqrt(2*pi*sigma^{2}, )) \* phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})}                                                      | stamp\_eq\_normal     |
-| 14 | 14 | ![{{\_N}C{\_k}} \\\\cdot p^kq^{N-k}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7B%7B_N%7DC%7B_k%7D%7D%20%5C%5Ccdot%20p%5Ekq%5E%7BN-k%7D "{{_N}C{_k}} \\\\cdot p^kq^{N-k}")                                                                                                                                                                                                                                                                                           | Binomial Distribution  | Probability                           | {{{}\[N\]}*C * {{}\[k\]}} %.% p^{k}\*q^{N - k}                                                                                                                                         | stamp\_eq\_binomial   |
-| 15 | 15 | ![(1-p)^(n-1)\*p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%281-p%29%5E%28n-1%29%2Ap "(1-p)^(n-1)*p")                                                                                                                                                                                                                                                                                                                                                                | Geometric Distribution | Probability                           | (1 - p)^{n - 1} \~ symbol(’\*’) \~ p                                                                                                                                                   | stamp\_eq\_geometric  |
-| 16 | 16 | ![n\!\\\\(r\!\*(n-r)\!)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%21%5C%5C%28r%21%2A%28n-r%29%21%29 "n!\\\\(r!*(n-r)!)")                                                                                                                                                                                                                                                                                                                                           | Choose Equation        | Probability                           | {}\[n\]*C\[r\] * {phantom() == phantom()} \* frac(n*‘\!’, r*’\!’(n - r)\*‘\!’)                                                                                                         | stamp\_eq\_choose     |
+|    |  X | mathjax                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | description            | context                               | plotmath                                                                                                                                                                               | stamp\_function\_name |
+| :- | -: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------- | :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------- |
+| 10 | 10 | ![E\[X\] = x\_1p\_1 + x\_2p\_2 + x\_3p\_3 ...x\_np\_n = \\\\sum\_1^n{x\_ip\_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;E%5BX%5D%20%3D%20x_1p_1%20%2B%20x_2p_2%20%2B%20x_3p_3%20...x_np_n%20%3D%20%5C%5Csum_1%5En%7Bx_ip_i%7D "E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\\\sum_1^n{x_ip_i}")                                                                                                                                                              | Expected Value         | Probability Distributions             | E \* ‘\[’ *X * ’\]’ \* {phantom() == phantom()} \* x\[1\]*p\[1\] + x\[2\]*p\[2\] + x\[3\]*p\[3\]*…x\[n\]*p\[n\] * {phantom() == phantom()} \* sum(x\[i\]\*p\[i\], 1, n)                | stamp\_eq\_ev         |
+| 11 | 11 | ![Var(X) = E\[(X-\\\\mu)^2\] = \\\\sigma^2\_x = \\\\sum\_1^n(x\_i-\\\\mu)^2p\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Var%28X%29%20%3D%20E%5B%28X-%5C%5Cmu%29%5E2%5D%20%3D%20%5C%5Csigma%5E2_x%20%3D%20%5C%5Csum_1%5En%28x_i-%5C%5Cmu%29%5E2p_i "Var(X) = E[(X-\\\\mu)^2] = \\\\sigma^2_x = \\\\sum_1^n(x_i-\\\\mu)^2p_i")                                                                                                                                 | Variance               | Description of the spread of the Data | Var(X) \* {phantom() == phantom()} \* E \* ‘\[’ *(X - mu)^{2} * ’\]’ \* {phantom() == phantom()} \* sigma\[x\]^{2} \* {phantom() == phantom()} \* sum(, 1, n)*(x\[i\] - mu)^{2}*p\[i\] | stamp\_eq\_var        |
+| 12 | 12 | ![\\\\sigma\_x = SD(X) = \\\\sqrt{Var(X)}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%5Csigma_x%20%3D%20SD%28X%29%20%3D%20%5C%5Csqrt%7BVar%28X%29%7D "\\\\sigma_x = SD(X) = \\\\sqrt{Var(X)}")                                                                                                                                                                                                                                                               | standard deviation     | Description of the spread of the Data | sigma\[x\] \* {phantom() == phantom()} \* SD(X) \* {phantom() == phantom()} \* sqrt(Var(X), )                                                                                          | stamp\_eq\_sd         |
+| 13 | 13 | ![p(x) = \\\\frac{1}{\\\\sqrt{ 2 \\\\pi \\\\sigma^2 }} e^{ - \\\\frac{ (x - \\\\mu)^2 } {2 \\\\sigma^2} }](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%28x%29%20%3D%20%5C%5Cfrac%7B1%7D%7B%5C%5Csqrt%7B%202%20%5C%5Cpi%20%5C%5Csigma%5E2%20%7D%7D%20e%5E%7B%20-%20%5C%5Cfrac%7B%20%28x%20-%20%5C%5Cmu%29%5E2%20%7D%20%7B2%20%5C%5Csigma%5E2%7D%20%7D "p(x) = \\\\frac{1}{\\\\sqrt{ 2 \\\\pi \\\\sigma^2 }} e^{ - \\\\frac{ (x - \\\\mu)^2 } {2 \\\\sigma^2} }") | Normal Distribution    | Probability                           | p(x) \* {phantom() == phantom()} \* frac(1, sqrt(2*pi*sigma^{2}, )) \* phantom(.)*e^{phantom() - frac((x - mu)^{2}, 2*sigma^{2})}                                                      | stamp\_eq\_normal     |
+| 14 | 14 | ![{{\_N}C{\_k}} \\\\cdot p^kq^{N-k}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7B%7B_N%7DC%7B_k%7D%7D%20%5C%5Ccdot%20p%5Ekq%5E%7BN-k%7D "{{_N}C{_k}} \\\\cdot p^kq^{N-k}")                                                                                                                                                                                                                                                                                     | Binomial Distribution  | Probability                           | {{{}\[N\]}*C * {{}\[k\]}} %.% p^{k}\*q^{N - k}                                                                                                                                         | stamp\_eq\_binomial   |
+| 15 | 15 | ![(1-p)^(n-1)\*p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%281-p%29%5E%28n-1%29%2Ap "(1-p)^(n-1)*p")                                                                                                                                                                                                                                                                                                                                                          | Geometric Distribution | Probability                           | (1 - p)^{n - 1} \~ symbol(’\*’) \~ p                                                                                                                                                   | stamp\_eq\_geometric  |
+| 16 | 16 | ![n\!\\\\(r\!\*(n-r)\!)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%21%5C%5C%28r%21%2A%28n-r%29%21%29 "n!\\\\(r!*(n-r)!)")                                                                                                                                                                                                                                                                                                                                     | Choose Equation        | Probability                           | {}\[n\]*C\[r\] * {phantom() == phantom()} \* frac(n*‘\!’, r*’\!’(n - r)\*‘\!’)                                                                                                         | stamp\_eq\_choose     |
 
 ## 2\. Work on specific functions that serve as a reference for how remainder should look.
 
@@ -198,6 +200,28 @@ To see exactly how we used the template to generate all the functions
 for this package, see the processing code
 [here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd).
 
+The function files are the following:
+
+``` r
+list.files("R/")
+#>  [1] "stamp_eq_binomial.R"                 "stamp_eq_choose.R"                  
+#>  [3] "stamp_eq_ci.R"                       "stamp_eq_ev.R"                      
+#>  [5] "stamp_eq_geometric.R"                "stamp_eq_normal.R"                  
+#>  [7] "stamp_eq_sd_null_t_test.R"           "stamp_eq_sd_null_z_test.R"          
+#>  [9] "stamp_eq_sd.R"                       "stamp_eq_se_t_test.R"               
+#> [11] "stamp_eq_se_z_test.R"                "stamp_eq_var.R"                     
+#> [13] "stamp_sd_null_2_sample_t_test.R"     "stamp_sd_null_two_sample_t_test.R"  
+#> [15] "stamp_se_two_sample_t_test.R"        "stamp_statistic.R"                  
+#> [17] "typeset_eq_binomial.R"               "typeset_eq_choose.R"                
+#> [19] "typeset_eq_ci.R"                     "typeset_eq_ev.R"                    
+#> [21] "typeset_eq_geometric.R"              "typeset_eq_normal.R"                
+#> [23] "typeset_eq_sd_null_t_test.R"         "typeset_eq_sd_null_z_test.R"        
+#> [25] "typeset_eq_sd.R"                     "typeset_eq_se_t_test.R"             
+#> [27] "typeset_eq_se_z_test.R"              "typeset_eq_var.R"                   
+#> [29] "typeset_sd_null_2_sample_t_test.R"   "typeset_sd_null_two_sample_t_test.R"
+#> [31] "typeset_se_two_sample_t_test.R"      "typeset_statistic.R"
+```
+
 -----
 
 <!-- Fortunately, a translater exists. -->
@@ -240,6 +264,27 @@ knitr::include_graphics("https://i.kym-cdn.com/photos/images/newsfeed/001/179/54
 popularity, particularly on Brazilian parts of social media, before it
 grew popular worldwide.’
 “<https://knowyourmeme.com/memes/math-lady-confused-lady>”
+
+Chat GPT prompt: Why is the ‘when a woman says she’s 29 weeks pregnant’
+meme funny?
+
+> The “when a woman says she’s 29 weeks pregnant” meme is a humorous
+> observation on the specificity with which women tend to describe their
+> pregnancy progress. The joke is that a woman who says she is 29 weeks
+> pregnant is providing a level of detail that is more than necessary
+> for most people, and can be seen as somewhat comical.
+
+> The meme often features a photo or image of a person with a confused
+> or bewildered expression, with text overlayed that reads something
+> along the lines of “me trying to figure out how many months that is.”
+> The humor comes from the idea that it can be difficult for people who
+> are not pregnant or familiar with pregnancy terminology to understand
+> what is meant by phrases like “29 weeks.”
+
+> In short, the meme is funny because it pokes fun at the precision with
+> which pregnant women tend to describe their pregnancy progress, and
+> the confusion that can result when that level of detail is shared with
+> others who are not as familiar with the terminology.
 
 -----
 
@@ -285,82 +330,3 @@ proportion) and .rmd documents.
 
   - create a github account for collaboration <https://github.com/>
   - we’ll make the repository available in this account
-
-<!-- end list -->
-
-``` r
-plotmath_ev <- latex2exp::TeX("$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$")
-plotmath_var <- latex2exp::TeX("$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$")
-plotmath_sd <- latex2exp::TeX("$\\sigma_x = SD(X) = \\sqrt{Var(X)}$")
-
-
-
-### stamp equation example
-stamp_one_plus_one <- function(x = 0, y = 0, ...){
-
-  annotate(geom = "text",
-           label = "1 + 1",
-           parse = T,
-           x = x, y = y, ...)
-
-}
-
-library(tidyverse)
-ggplot2::ggplot() +
-  stamp_one_plus_one() +
-  stamp_one_plus_one(size = 12, y = 2)
-
-
-tibble::tibble(event = c("totaled", "fender bender", "accident free"),
-       probability = c(.01, .09, .9),
-       payout = c(20000, 5000, 0)) ->
-  expected
-
-
-expected %>%
-  ggplot() +
-  aes(x = payout, y = probability) +
-  geom_point() +
-  geom_segment(aes(xend = payout, yend = 0)) +
-  geom_text(aes(label = probability), size = 5,
-            vjust = -.5, color = "black") +
-  geom_vline(xintercept = sum(c(.01*20000, .09*5000)),
-             linetype = "dashed", color = "black") +
-  labs(subtitle = "Course idea 8:  The expected value E.V. is the 'balancing point' of a Random variable, X.  It is the weighted average of values, (weighting values by their probabilities). In large samples from the X, the average will be close to the E.V.;" %>% str_wrap(60)) +
-  annotate(geom = "label", x =sum(c(.01*20000, .09*5000)), label = sum(c(.01*20000, .09*5000)), y = .5 ) +
-  scale_y_continuous(limits = c(0,1)) +
-  annotate(geom = "text", label = "E * '[' *X * ']' * {phantom() == phantom()} * x[1]*p[1] + x[2]*p[2] + x[3]*p[3]*...x[n]*p[n] * {phantom() == phantom()} * sum(x[i]*p[i], 1, n) ", parse = T,
-           x = 12000, y = .95) +
-  annotate(geom = "text", label = "Var(X) * {phantom() == phantom()} * E * '[' *(X - mu)^{2} * ']' * {phantom() == phantom()} * sigma[x]^{2} * {phantom() == phantom()} * sum(, 1, n)*(x[i] - mu)^{2}*p[i] ", parse = T,
-           x = 12000, y = .8) +
-  annotate(geom = "text", label = "sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) ", parse = T,
-           x = 12000, y = .65)
-
-
-
-stamp_eq_ev <- function(x = 0,  y = 0){
-
-  # your work here
-
-}
-
-
-stamp_eq_var <- function(x = 0,  y = 0){
-
-  # your work here
-
-}
-
-stamp_eq_sd <- function(x = 0,  y = 0){
-
-  # your work here
-
-}
-
-
-
-ggplot() +
-  stamp_eq_ev() +
-  stamp_eq_var(y = -1)+
-  stamp_eq_sd(y = -2)
-```

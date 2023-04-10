@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_se_two_sample_t_test
+#' typeset_se_two_sample_t_test()
 
-typeset_se_two_sample_t_test <- function (){
+typeset_se_two_sample_t_test <- function (inline = FALSE){
 
-  cat("$se=\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}$")
+if(inline){
+"$se=\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}$"
+}else{
+cat("$se=\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}$")
+}
+
 
 }

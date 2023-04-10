@@ -12,10 +12,14 @@
 #'
 #' @examples
 #' typeset_eq_binomial()
-#'
 
-typeset_eq_binomial <- function (){
+typeset_eq_binomial <- function (inline = FALSE){
 
-  cat("${{_N}C{_k}} \\cdot p^kq^{N-k}$")
+if(inline){
+"${{_N}C{_k}} \\cdot p^kq^{N-k}$"
+}else{
+cat("${{_N}C{_k}} \\cdot p^kq^{N-k}$")
+}
+
 
 }

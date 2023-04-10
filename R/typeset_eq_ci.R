@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_ci
+#' typeset_eq_ci()
 
-typeset_eq_ci <- function (){
+typeset_eq_ci <- function (inline = FALSE){
 
-  cat("$se=\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$ ")
+if(inline){
+"$se=\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$ "
+}else{
+cat("$se=\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$ ")
+}
+
 
 }

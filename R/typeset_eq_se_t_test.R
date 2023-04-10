@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_se_t_test
+#' typeset_eq_se_t_test()
 
-typeset_eq_se_t_test <- function (){
+typeset_eq_se_t_test <- function (inline = FALSE){
 
-  cat("$se=s/sqrt{n}$")
+if(inline){
+"$se=s/sqrt{n}$"
+}else{
+cat("$se=s/sqrt{n}$")
+}
+
 
 }

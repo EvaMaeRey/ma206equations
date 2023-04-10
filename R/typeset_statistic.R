@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_statistic
+#' typeset_statistic()
 
-typeset_statistic <- function (){
+typeset_statistic <- function (inline = FALSE){
 
-  cat("$\\textrm{stat}=\\hat{p_1}-\\hat{p_2}$")
+if(inline){
+"$\\textrm{stat}=\\hat{p_1}-\\hat{p_2}$"
+}else{
+cat("$\\textrm{stat}=\\hat{p_1}-\\hat{p_2}$")
+}
+
 
 }

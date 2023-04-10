@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_sd_null_z_test
+#' typeset_eq_sd_null_z_test()
 
-typeset_eq_sd_null_z_test <- function (){
+typeset_eq_sd_null_z_test <- function (inline = FALSE){
 
-  cat("$sd_{null}=\\sqrt{\\frac{\\pi_0(1-\\pi_0)}{n}}$ ")
+if(inline){
+"$sd_{null}=\\sqrt{\\frac{\\pi_0(1-\\pi_0)}{n}}$ "
+}else{
+cat("$sd_{null}=\\sqrt{\\frac{\\pi_0(1-\\pi_0)}{n}}$ ")
+}
+
 
 }

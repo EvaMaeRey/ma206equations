@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_sd_null_2_sample_t_test
+#' typeset_sd_null_2_sample_t_test()
 
-typeset_sd_null_2_sample_t_test <- function (){
+typeset_sd_null_2_sample_t_test <- function (inline = FALSE){
 
-  cat("$sd_{null}=\\sqrt{\\hat{p}*(1-\\hat{p})*(\\frac{1}{n_1}+\\frac{1}{n_2})}$")
+if(inline){
+"$sd_{null}=\\sqrt{\\hat{p}*(1-\\hat{p})*(\\frac{1}{n_1}+\\frac{1}{n_2})}$"
+}else{
+cat("$sd_{null}=\\sqrt{\\hat{p}*(1-\\hat{p})*(\\frac{1}{n_1}+\\frac{1}{n_2})}$")
+}
+
 
 }

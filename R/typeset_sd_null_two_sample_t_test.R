@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_sd_null_two_sample_t_test
+#' typeset_sd_null_two_sample_t_test()
 
-typeset_sd_null_two_sample_t_test <- function (){
+typeset_sd_null_two_sample_t_test <- function (inline = FALSE){
 
-  cat("$sd_{null}=\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}$")
+if(inline){
+"$sd_{null}=\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}$"
+}else{
+cat("$sd_{null}=\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}$")
+}
+
 
 }

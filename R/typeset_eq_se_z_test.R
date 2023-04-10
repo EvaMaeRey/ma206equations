@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_se_z_test
+#' typeset_eq_se_z_test()
 
-typeset_eq_se_z_test <- function (){
+typeset_eq_se_z_test <- function (inline = FALSE){
 
-  cat("$sd_{null}=\\sqrt{\\hat{p}*(1-\\hat{p})*(\\frac{1}{n_1}+\\frac{1}{n_2})}$")
+if(inline){
+"$sd_{null}=\\sqrt{\\hat{p}*(1-\\hat{p})*(\\frac{1}{n_1}+\\frac{1}{n_2})}$"
+}else{
+cat("$sd_{null}=\\sqrt{\\hat{p}*(1-\\hat{p})*(\\frac{1}{n_1}+\\frac{1}{n_2})}$")
+}
+
 
 }

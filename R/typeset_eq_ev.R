@@ -11,11 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_ev
+#' typeset_eq_ev()
 
 typeset_eq_ev <- function (inline = FALSE){
 
-  if(inline){"$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"}else{
-  cat("$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$")}
+if(inline){
+"$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$"
+}else{
+cat("$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$")
+}
+
 
 }

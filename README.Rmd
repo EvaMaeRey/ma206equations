@@ -123,21 +123,21 @@ What if we could call a function to get back the text that will render to our be
 Our package ma206equations delivers exactly this. ma206equations delivers tex version of equations that can be used in prose, as shown here:
 
 ```{r}
-ma206equations::typeset_eq_ev()
+ma206equations::typeset_eq_normal()
 ```
 
 Educators can call this equation and then copy and paste into hybrid prose-code documents, or use in-line code to return the equation dynamically: 
-$$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \sum_1^n{x_ip_i}$$
+$$p(x) = \frac{1}{\sqrt{ 2 \pi \sigma^2 }} e^{ - \frac{ (x - \mu)^2 } {2 \sigma^2} }$$
 
 ```{verbatim}
 This is an example of how to return an equation inline: 
   
-`r ma206equations::typeset_eq_ev(inline = TRUE)`
+`r ma206equations::typeset_eq_normal(inline = TRUE)`
 
 ```
 
 
-This is an example of how to return an equation inline: `r ma206equations::typeset_eq_ev(inline = TRUE)`
+This is an example of how to return an equation inline: `r ma206equations::typeset_eq_normal(inline = TRUE)`
 
 To use equations in a plotting context, ma206equations provides stamp_eq_*() functions.  An example of how to print the normal distribution equation with ma206equations follows:
 
@@ -149,7 +149,7 @@ ggxmean:::stamp_space() +
   ggxmean::stamp_normal_dist()
 ```
 
-# metaprogramming: code that writes code
+# metaprogramming maintanance strategy: code that writes code
 
 At first we worked on writing functions one by one. However, doing so for the large number of equations that we thought might be useful did not seems sustainable.  Therefore we turned to a meta-programming:
 
@@ -160,7 +160,7 @@ The meta programming files are included in data-raw folder of this package.  The
 1) spreadsheet of equations of interest for ma206, descriptions etc.
 2) function composition and testing files 
 3) function template files 
-3) r package function generation code from templates and spreadsheet
+4) r package function generation code from templates and spreadsheet
 
 ## 1 'data' collection
 
@@ -188,7 +188,11 @@ readLines("data-raw/plotmath_equations_template.txt")
 
 To see exactly how we used the template to generate all the functions for this package, see the processing code [here](https://github.com/EvaMaeRey/ma206equations/blob/main/data-raw/process_excel_file.Rmd).
 
+The function files are the following: 
 
+```{r}
+list.files("R/")
+```
 
 
 ---
@@ -218,7 +222,13 @@ knitr::include_graphics("https://i.kym-cdn.com/photos/images/newsfeed/001/179/54
 
 'After the math symbols were added, the image and gif surged in popularity, particularly on Brazilian parts of social media, before it grew popular worldwide.' "https://knowyourmeme.com/memes/math-lady-confused-lady"
 
+Chat GPT prompt: Why is the 'when a woman says she's 29 weeks pregnant' meme funny?
 
+> The "when a woman says she's 29 weeks pregnant" meme is a humorous observation on the specificity with which women tend to describe their pregnancy progress. The joke is that a woman who says she is 29 weeks pregnant is providing a level of detail that is more than necessary for most people, and can be seen as somewhat comical.
+
+> The meme often features a photo or image of a person with a confused or bewildered expression, with text overlayed that reads something along the lines of "me trying to figure out how many months that is." The humor comes from the idea that it can be difficult for people who are not pregnant or familiar with pregnancy terminology to understand what is meant by phrases like "29 weeks."
+
+> In short, the meme is funny because it pokes fun at the precision with which pregnant women tend to describe their pregnancy progress, and the confusion that can result when that level of detail is shared with others who are not as familiar with the terminology.
 
 
 ---
@@ -269,98 +279,4 @@ Result would be to quickly include relevant formulas in plots (like ggplot below
 
 - create a github account for collaboration https://github.com/
 - we'll make the repository available in this account
-
-
-```{r, eval = F}
-plotmath_ev <- latex2exp::TeX("$E[X] = x_1p_1 + x_2p_2 + x_3p_3 ...x_np_n = \\sum_1^n{x_ip_i}$")
-plotmath_var <- latex2exp::TeX("$Var(X) = E[(X-\\mu)^2] = \\sigma^2_x = \\sum_1^n(x_i-\\mu)^2p_i$")
-plotmath_sd <- latex2exp::TeX("$\\sigma_x = SD(X) = \\sqrt{Var(X)}$")
-
-
-
-### stamp equation example
-stamp_one_plus_one <- function(x = 0, y = 0, ...){
-
-  annotate(geom = "text",
-           label = "1 + 1",
-           parse = T,
-           x = x, y = y, ...)
-
-}
-
-library(tidyverse)
-ggplot2::ggplot() +
-  stamp_one_plus_one() +
-  stamp_one_plus_one(size = 12, y = 2)
-
-
-tibble::tibble(event = c("totaled", "fender bender", "accident free"),
-       probability = c(.01, .09, .9),
-       payout = c(20000, 5000, 0)) ->
-  expected
-
-
-expected %>%
-  ggplot() +
-  aes(x = payout, y = probability) +
-  geom_point() +
-  geom_segment(aes(xend = payout, yend = 0)) +
-  geom_text(aes(label = probability), size = 5,
-            vjust = -.5, color = "black") +
-  geom_vline(xintercept = sum(c(.01*20000, .09*5000)),
-             linetype = "dashed", color = "black") +
-  labs(subtitle = "Course idea 8:  The expected value E.V. is the 'balancing point' of a Random variable, X.  It is the weighted average of values, (weighting values by their probabilities). In large samples from the X, the average will be close to the E.V.;" %>% str_wrap(60)) +
-  annotate(geom = "label", x =sum(c(.01*20000, .09*5000)), label = sum(c(.01*20000, .09*5000)), y = .5 ) +
-  scale_y_continuous(limits = c(0,1)) +
-  annotate(geom = "text", label = "E * '[' *X * ']' * {phantom() == phantom()} * x[1]*p[1] + x[2]*p[2] + x[3]*p[3]*...x[n]*p[n] * {phantom() == phantom()} * sum(x[i]*p[i], 1, n) ", parse = T,
-           x = 12000, y = .95) +
-  annotate(geom = "text", label = "Var(X) * {phantom() == phantom()} * E * '[' *(X - mu)^{2} * ']' * {phantom() == phantom()} * sigma[x]^{2} * {phantom() == phantom()} * sum(, 1, n)*(x[i] - mu)^{2}*p[i] ", parse = T,
-           x = 12000, y = .8) +
-  annotate(geom = "text", label = "sigma[x] * {phantom() == phantom()} * SD(X) * {phantom() == phantom()} * sqrt(Var(X), ) ", parse = T,
-           x = 12000, y = .65)
-
-
-
-stamp_eq_ev <- function(x = 0,  y = 0){
-
-  # your work here
-
-}
-
-
-stamp_eq_var <- function(x = 0,  y = 0){
-
-  # your work here
-
-}
-
-stamp_eq_sd <- function(x = 0,  y = 0){
-
-  # your work here
-
-}
-
-
-
-ggplot() +
-  stamp_eq_ev() +
-  stamp_eq_var(y = -1)+
-  stamp_eq_sd(y = -2)
-
-
-
-```
-
-
-
-
-```{r eval = F, echo = F}
-fs::dir_ls("README_files/figure-gfm/.")
-file.copy(fs::dir_ls("README_files/figure-gfm/."), to = "docs/reference/figures/.", recursive = T)
-
-readLines("docs/index.html") %>% 
-  str_replace_all("README_files/figure-gfm/", "reference/figures/") %>% 
-  writeLines(con = "docs/index.html")
-```
-
 

@@ -11,10 +11,15 @@
 #' @export
 #'
 #' @examples
-#' typeset_eq_sd
+#' typeset_eq_sd()
 
-typeset_eq_sd <- function (){
+typeset_eq_sd <- function (inline = FALSE){
 
-  cat("$\\sigma_x = SD(X) = \\sqrt{Var(X)}$")
+if(inline){
+"$\\sigma_x = SD(X) = \\sqrt{Var(X)}$"
+}else{
+cat("$\\sigma_x = SD(X) = \\sqrt{Var(X)}$")
+}
+
 
 }
